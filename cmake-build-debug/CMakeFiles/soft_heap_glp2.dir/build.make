@@ -57,27 +57,27 @@ include CMakeFiles/soft_heap_glp2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/soft_heap_glp2.dir/flags.make
 
-CMakeFiles/soft_heap_glp2.dir/library.cpp.o: CMakeFiles/soft_heap_glp2.dir/flags.make
-CMakeFiles/soft_heap_glp2.dir/library.cpp.o: ../library.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/soft_heap_glp2.dir/library.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/soft_heap_glp2.dir/library.cpp.o -c /home/raph/Desktop/glp2/library.cpp
+CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o: CMakeFiles/soft_heap_glp2.dir/flags.make
+CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o: ../softheap.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o -c /home/raph/Desktop/glp2/softheap.cpp
 
-CMakeFiles/soft_heap_glp2.dir/library.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/soft_heap_glp2.dir/library.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/raph/Desktop/glp2/library.cpp > CMakeFiles/soft_heap_glp2.dir/library.cpp.i
+CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/raph/Desktop/glp2/softheap.cpp > CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i
 
-CMakeFiles/soft_heap_glp2.dir/library.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/soft_heap_glp2.dir/library.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raph/Desktop/glp2/library.cpp -o CMakeFiles/soft_heap_glp2.dir/library.cpp.s
+CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raph/Desktop/glp2/softheap.cpp -o CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s
 
 # Object files for target soft_heap_glp2
 soft_heap_glp2_OBJECTS = \
-"CMakeFiles/soft_heap_glp2.dir/library.cpp.o"
+"CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o"
 
 # External object files for target soft_heap_glp2
 soft_heap_glp2_EXTERNAL_OBJECTS =
 
-libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/library.cpp.o
+libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o
 libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/build.make
 libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libsoft_heap_glp2.a"

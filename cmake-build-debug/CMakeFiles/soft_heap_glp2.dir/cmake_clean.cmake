@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/soft_heap_glp2.dir/library.cpp.o"
+  "CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o"
   "libsoft_heap_glp2.pdb"
   "libsoft_heap_glp2.a"
 )

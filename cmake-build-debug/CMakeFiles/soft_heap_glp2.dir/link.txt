@@ -1,2 +1,2 @@
-/usr/bin/ar qc libsoft_heap_glp2.a  CMakeFiles/soft_heap_glp2.dir/library.cpp.o
+/usr/bin/ar qc libsoft_heap_glp2.a  CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o
 /usr/bin/ranlib libsoft_heap_glp2.a

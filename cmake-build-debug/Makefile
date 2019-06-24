@@ -123,32 +123,32 @@ soft_heap_glp2/fast:
 	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/build
 .PHONY : soft_heap_glp2/fast
 
-library.o: library.cpp.o
+softheap.o: softheap.cpp.o
 
-.PHONY : library.o
+.PHONY : softheap.o
 
 # target to build an object file
-library.cpp.o:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/library.cpp.o
-.PHONY : library.cpp.o
+softheap.cpp.o:
+	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o
+.PHONY : softheap.cpp.o
 
-library.i: library.cpp.i
+softheap.i: softheap.cpp.i
 
-.PHONY : library.i
+.PHONY : softheap.i
 
 # target to preprocess a source file
-library.cpp.i:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/library.cpp.i
-.PHONY : library.cpp.i
+softheap.cpp.i:
+	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i
+.PHONY : softheap.cpp.i
 
-library.s: library.cpp.s
+softheap.s: softheap.cpp.s
 
-.PHONY : library.s
+.PHONY : softheap.s
 
 # target to generate assembly for a file
-library.cpp.s:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/library.cpp.s
-.PHONY : library.cpp.s
+softheap.cpp.s:
+	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s
+.PHONY : softheap.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... soft_heap_glp2"
 	@echo "... edit_cache"
-	@echo "... library.o"
-	@echo "... library.i"
-	@echo "... library.s"
+	@echo "... softheap.o"
+	@echo "... softheap.i"
+	@echo "... softheap.s"
 .PHONY : help
 
 

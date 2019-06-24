@@ -1,6 +1,0 @@
-#ifndef SOFT_HEAP_GLP2_LIBRARY_H
-#define SOFT_HEAP_GLP2_LIBRARY_H
-
-void hello();
-
-#endif //SOFT_HEAP_GLP2_LIBRARY_H
