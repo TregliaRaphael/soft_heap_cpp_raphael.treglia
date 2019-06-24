@@ -38,6 +38,21 @@ private:
     double max_node_rank;
     int rank;
 
+    /*FIXME*/
+    void sift(Node *x) = 0;
+    Node *combine(Node *x, Node *y) = 0;
+    void meld(SoftHeap *q) = 0;
+    void insert(E e) = 0;
+    E extract_min() = 0;
+    void merge_into(SoftHeap *q) = 0;
+    void repeated_combine(SoftHeap *q, int k) = 0;
+    void update_suffix_min(Tree t) = 0;
+    void insert_tree(Tree t1, Tree t2) = 0;
+    void remove_tree(Tree t) = 0;
+    Tree* make_tree(E e) = 0;
+    Node* make_node(E e) = 0;
+    bool leaf(Node *x) = 0;
+    /*FIXME*/
 
 };
 
@@ -50,7 +65,7 @@ SoftHeap<E>::SoftHeap(E e) {
     this->epsilon = 0.5;
     this->rank = 0;
     this->max_node_rank = log2(1. / this->epsilon) + 5;
-    this->first = nullptr;
+    this->first = make_tree(e);
 }
 
 
@@ -67,6 +82,8 @@ template<typename E>
 SoftHeap<E>::ListCell::~ListCell(){
     delete this->next;
     this->next = nullptr;
+    delete this->elem;
+    this->elem = nullptr;
 }
 
 template<typename E>
