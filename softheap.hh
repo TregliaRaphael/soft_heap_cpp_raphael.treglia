@@ -136,5 +136,5 @@ SoftHeap<E>::Node::~Node(){
     this->right = nullptr;
 }
 
-/*template <typename E>
-  void swap (E *a, E* b);*/
+template <typename E>
+void swap (E *a, E* b);
