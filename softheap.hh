@@ -20,7 +20,8 @@ struct SoftHeap {
         int rank, size, ckey;
         Node *left, *right;
         ListCell *list;
-        ~Node();
+      Node(E e);
+      ~Node();
     };
 
     struct Tree {
@@ -75,6 +76,18 @@ SoftHeap<E>::Node::Node(E e) {
   this->left = null;
   this->right = null;
 }
+
+/*template<typename E>
+SoftHeap<E>::Tree::Tree(E e) {
+  this->list = new ListCell(e);
+  this->rank = 0;
+  this->size = 1;
+  this->ckey = e;
+  this->left = null;
+  this->right = null;
+  }*/
+
+
 
 
 template<typename E>
