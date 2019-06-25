@@ -7,10 +7,17 @@
 #include <cmath>
 #include <typeinfo>
 
+/*DELETE AND SET NULL*/
+template<typename E>
+void delAndSetNullptr(E *e){
+    delete e;
+    e = nullptr;
+}
+
 template<typename E>
 struct SoftHeap {
     struct ListCell {
-        E* elem;
+        E elem;
         ListCell *next;
         int size();
 
@@ -19,7 +26,8 @@ struct SoftHeap {
     };
 
     struct Node {
-        int rank, size, ckey;
+        int rank{}, size{};
+        E ckey;
         Node *left, *right;
         ListCell *list;
 
@@ -48,42 +56,45 @@ struct SoftHeap {
 private:
     double epsilon;
     Tree *first;
-    double max_node_rank;
+    int max_node_rank;
     int rank;
 
     void sift(Node *x);
     Node *combine(Node *x, Node *y);
     bool searchAndDestroy(Node *x, E e);
     void merge_into(SoftHeap *q);
-    void repeated_combine(SoftHeap *q, int k);
+    void repeated_combine(SoftHeap *q, int rk);
     void update_suffix_min(Tree *t);
     void insert_tree(SoftHeap *q, Tree *t1, Tree *t2);
     void remove_tree(SoftHeap *q, Tree *t);
     bool leaf(Node *x);
-    void concatenate(ListCell *l1, ListCell *l2);
+    void concatenate(Node *n1, Node *n2);
+    void concatenateRec(ListCell *l1, ListCell *l2);
     E pick_elem(Node* x);
-
+    void swapLR(Node *x);
 };
 
 
 /*CONSTRUCTORS*/
 
+//FIXME NEW E
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E e) {
-  this->elem = new E(e);
+  this->elem = e;
   this->next = nullptr;
 }
 
 template<typename E>
 SoftHeap<E>::Node::Node(SoftHeap<E>::Node *l, SoftHeap<E>::Node *r) {
     this->list = nullptr;
-    this->rank = left->rank + 1;
-    this->size = nullptr;
-    this->ckey = nullptr;
+    this->rank = l->rank + 1;
+    this->size = 0;
+    this->ckey = 0;
     this->left = l;
     this->right = r;
 }
 
+//FIXME NEW E
 template<typename E>
 SoftHeap<E>::Node::Node(E e) {
   this->list = new ListCell(e);
@@ -105,7 +116,7 @@ SoftHeap<E>::Tree::Tree(E e) {
 
 template<typename E>
 SoftHeap<E>::SoftHeap(E e) {
-    this->epsilon = 0.5;
+    this->epsilon = 0.1;
     this->rank = 0;
     this->max_node_rank = log2(1. / this->epsilon) + 5;
     this->first = new Tree(e);
@@ -117,16 +128,16 @@ SoftHeap<E>::SoftHeap(E e) {
 
 template<typename E>
 SoftHeap<E>::~SoftHeap(){
-    if (this->prev != nullptr)
+    if (this->first != nullptr)
         delAndSetNullptr(this->first);
 }
 
 template<typename E>
 SoftHeap<E>::ListCell::~ListCell(){
-    if (this->prev != nullptr)
+    if (this->next != nullptr)
         delAndSetNullptr(this->next);
-    if (this->prev != nullptr)
-        delAndSetNullptr(this->elem);
+    /*if (this->elem != nullptr)
+        delAndSetNullptr(this->elem);*/
 }
 
 template<typename E>
@@ -137,6 +148,8 @@ SoftHeap<E>::Node::~Node(){
         delAndSetNullptr(this->left);
     if (this->right != nullptr)
         delAndSetNullptr(this->right);
+    /*if (this->ckey != nullptr)
+        delAndSetNullptr(this->ckey);*/
 }
 
 template<typename E>
@@ -147,18 +160,19 @@ SoftHeap<E>::Tree::~Tree(){
         delAndSetNullptr(this->prev);
     if (this->next != nullptr)
         delAndSetNullptr(this->next);
-    if (this->prev != nullptr)
-        delAndSetNullptr(this->sufmin);
+    /*if (this->sufmin != nullptr)
+     * SUFMIN WAS AMONG NEXT AND PREV => Don't need to delete it then
+        delAndSetNullptr(this->sufmin);*/
 }
 
 /*SWAP DEC*/
 
 template <typename E>
-void swap (E *a, E* b);
+void swap (E *a, E *b);
 
-/*DELETE AND SET NULL*/
 template<typename E>
-void delAndSetNullptr(E *e){
-    delete e;
-    e = nullptr;
+void SoftHeap<E>::swapLR (Node *x){
+    Node *tmp = x->left;
+    x->left = x->right;
+    x->right = tmp;
 }
