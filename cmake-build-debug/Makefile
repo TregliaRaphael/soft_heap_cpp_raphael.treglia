@@ -111,71 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named soft_heap_glp2
+# Target rules for targets named softheap.hh
 
 # Build rule for target.
-soft_heap_glp2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 soft_heap_glp2
-.PHONY : soft_heap_glp2
+softheap.hh: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 softheap.hh
+.PHONY : softheap.hh
 
 # fast build rule for target.
-soft_heap_glp2/fast:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/build
-.PHONY : soft_heap_glp2/fast
+softheap.hh/fast:
+	$(MAKE) -f CMakeFiles/softheap.hh.dir/build.make CMakeFiles/softheap.hh.dir/build
+.PHONY : softheap.hh/fast
 
-raph.o: raph.cpp.o
-
-.PHONY : raph.o
-
-# target to build an object file
-raph.cpp.o:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/raph.cpp.o
-.PHONY : raph.cpp.o
-
-raph.i: raph.cpp.i
-
-.PHONY : raph.i
-
-# target to preprocess a source file
-raph.cpp.i:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/raph.cpp.i
-.PHONY : raph.cpp.i
-
-raph.s: raph.cpp.s
-
-.PHONY : raph.s
-
-# target to generate assembly for a file
-raph.cpp.s:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/raph.cpp.s
-.PHONY : raph.cpp.s
-
-softheap.o: softheap.cpp.o
+softheap.o: softheap.cc.o
 
 .PHONY : softheap.o
 
 # target to build an object file
-softheap.cpp.o:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o
-.PHONY : softheap.cpp.o
+softheap.cc.o:
+	$(MAKE) -f CMakeFiles/softheap.hh.dir/build.make CMakeFiles/softheap.hh.dir/softheap.cc.o
+.PHONY : softheap.cc.o
 
-softheap.i: softheap.cpp.i
+softheap.i: softheap.cc.i
 
 .PHONY : softheap.i
 
 # target to preprocess a source file
-softheap.cpp.i:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i
-.PHONY : softheap.cpp.i
+softheap.cc.i:
+	$(MAKE) -f CMakeFiles/softheap.hh.dir/build.make CMakeFiles/softheap.hh.dir/softheap.cc.i
+.PHONY : softheap.cc.i
 
-softheap.s: softheap.cpp.s
+softheap.s: softheap.cc.s
 
 .PHONY : softheap.s
 
 # target to generate assembly for a file
-softheap.cpp.s:
-	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s
-.PHONY : softheap.cpp.s
+softheap.cc.s:
+	$(MAKE) -f CMakeFiles/softheap.hh.dir/build.make CMakeFiles/softheap.hh.dir/softheap.cc.s
+.PHONY : softheap.cc.s
 
 # Help Target
 help:
@@ -184,11 +157,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... soft_heap_glp2"
+	@echo "... softheap.hh"
 	@echo "... edit_cache"
-	@echo "... raph.o"
-	@echo "... raph.i"
-	@echo "... raph.s"
 	@echo "... softheap.o"
 	@echo "... softheap.i"
 	@echo "... softheap.s"

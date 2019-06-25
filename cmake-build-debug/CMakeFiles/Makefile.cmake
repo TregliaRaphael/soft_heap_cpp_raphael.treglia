@@ -48,5 +48,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/soft_heap_glp2.dir/DependInfo.cmake"
+  "CMakeFiles/softheap.hh.dir/DependInfo.cmake"
   )

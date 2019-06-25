@@ -27,8 +27,8 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="soft_heap_glp2">
-				<Option output="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/libsoft_heap_glp2.a" prefix_auto="0" extension_auto="0"/>
+			<Target title="softheap.hh">
+				<Option output="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/libsoftheap.hh.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
@@ -44,14 +44,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 soft_heap_glp2"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 softheap.hh"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="soft_heap_glp2/fast">
-				<Option output="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/libsoft_heap_glp2.a" prefix_auto="0" extension_auto="0"/>
+			<Target title="softheap.hh/fast">
+				<Option output="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/libsoftheap.hh.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
@@ -67,7 +67,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 soft_heap_glp2/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 softheap.hh/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -84,14 +84,11 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/raph.cpp">
-			<Option target="soft_heap_glp2"/>
-		</Unit>
-		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cpp">
-			<Option target="soft_heap_glp2"/>
+		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cc">
+			<Option target="softheap.hh"/>
 		</Unit>
 		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.hh">
-			<Option target="soft_heap_glp2"/>
+			<Option target="softheap.hh"/>
 		</Unit>
 		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
