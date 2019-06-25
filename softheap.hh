@@ -66,16 +66,15 @@ SoftHeap<E>::ListCell::ListCell(E e) {
   this->next = null;
 }
 
-/*template<typename E>
+template<typename E>
 SoftHeap<E>::Node::Node(E e) {
-  this->list.elem = e;
-  this->list.elem->next = null;
+  this->list = new ListCell();
   this->rank = 0;
   this->size = 1;
   this->ckey = e;
   this->left = null;
   this->right = null;
-  }*/
+}
 
 
 template<typename E>
