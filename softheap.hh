@@ -108,4 +108,11 @@ SoftHeap<E>::Node::~Node(){
     this->right = nullptr;
 }
 
+/*P1*/
+/**/
 
+/*P2*/
+/**/
+
+/*P3*/
+/**/
