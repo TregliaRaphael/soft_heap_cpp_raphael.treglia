@@ -5,7 +5,7 @@
 template<typename E>
 void SoftHeap<E>::insert(E e)
 {
-    meld(this, new SoftHeap(e));
+    meld( new SoftHeap(e));
 }
 
 
@@ -28,11 +28,14 @@ void SoftHeap<E>::meld(SoftHeap* Q)
 
     merge_into(this,Q);
     repeated_combine(Q,this->rank);
-    return Q;
+
+    auto cpy = this;
+    this = Q;
+    delete cpy;
 }
 
 template<typename E>
-E pick_elem(SoftHeap<E>::Node x)
+E SoftHeap<E>::pick_elem(Node* x)
 {
     SoftHeap<E>::ListCell* cpy = x->list;
     SoftHeap<E>::ListCell* last = x->list;
@@ -44,7 +47,7 @@ E pick_elem(SoftHeap<E>::Node x)
     }
 
     E cpy_elem = last->elem;
-    delete[] last;
+    delete last;
     return cpy_elem;
 }
 

@@ -5,12 +5,12 @@
 
 #include <iostream>
 #include <cmath>
-
+#include <typeinfo>
 
 template<typename E>
 struct SoftHeap {
     struct ListCell {
-        E elem;
+        E* elem;
         ListCell *next;
         int size();
 
@@ -47,9 +47,9 @@ private:
     int rank;
 
     /*FIXME*/
-    void sift(Node *x) = 0;
+  /*    void sift(Node *x) = 0;
     Node *combine(Node *x, Node *y) = 0;
-    void meld(SoftHeap *q) = 0;
+    void meld(SoftHeap *Q);
     void insert(E e) = 0;
     E extract_min() = 0;
     void merge_into(SoftHeap *q) = 0;
@@ -61,7 +61,7 @@ private:
     Node* make_node(E e) = 0;
     bool leaf(Node *x) = 0;
     void concatenate(ListCell *l1, ListCell *l2) = 0;
-    E pick_elem(SoftHeap<E>::Node x);
+    E pick_elem(Node* x);
     /*FIXME*/
 
 };
@@ -71,7 +71,7 @@ private:
 
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E e) {
-  this->elem = e;
+  this->elem = new E(e);
   this->next = nullptr;
 }
 
@@ -101,7 +101,7 @@ SoftHeap<E>::Tree::Tree(E e) {
   this->rank = 0;
   this->prev = nullptr;
   this->next = nullptr;
-  this->suffmin = this;
+  this->sufmin = this;
 }
 
 template<typename E>
@@ -125,6 +125,7 @@ SoftHeap<E>::~SoftHeap(){
 template<typename E>
 SoftHeap<E>::ListCell::~ListCell(){
     delete this->next;
+    std::cout << typeid(this->elem).name() << std::endl;
     this->next = nullptr;
     delete this->elem;
     this->elem = nullptr;
