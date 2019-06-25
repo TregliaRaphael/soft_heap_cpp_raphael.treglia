@@ -56,3 +56,40 @@ bool SoftHeap<E>::leaf(Node *x) {
     return x->left == nullptr && x->right == nullptr;
 }
 
+template<typename E>
+void SoftHeap<E>::merge_into(SoftHeap *q) {
+    if (this->rank > q->rank)
+        return;
+
+    Tree *t1 = this->first;
+    Tree *t2 = q->first;
+
+    while(t1 != nullptr){
+        while(t1->rank > t2->rank)
+            t2 = t2->next;
+        Tree *t1bis = t1->next;
+        insert_tree(q, t1, t2);
+        t1 = t1bis;
+    }
+}
+
+template<typename E>
+void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
+    t1->next = t2;
+    if (t2->prev == nullptr)
+        q->first = t1;
+    else
+        t2->prev->next = t1;
+}
+
+template<typename E>
+void SoftHeap<E>::update_suffix_min(Tree *t) {
+    while(t != nullptr) {
+        if(t->root->ckey <= t->next->sufmin->root->ckey)
+            t->sufmin = t;
+        else
+            t->sufmin = t->next->sufmin;
+        t = t->prev;
+    }
+}
+

@@ -5,7 +5,7 @@
 template<typename E>
 void SoftHeap<E>::insert(E e)
 {
-    return meld(this, new SoftHeap(e));
+    meld(this, new SoftHeap(e));
 }
 
 
