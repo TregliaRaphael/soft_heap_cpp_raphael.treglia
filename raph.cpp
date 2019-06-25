@@ -93,3 +93,37 @@ void SoftHeap<E>::update_suffix_min(Tree *t) {
     }
 }
 
+template<typename E>
+void SoftHeap<E>::remove_tree(SoftHeap *q, Tree *t) {
+    Tree *to_delete = t;
+    if (t->prev == nullptr)
+        q->first = t->next;
+    else
+        t->prev->next = t->next;
+    if (t->next != nullptr)
+        t->next->prev = t->prev;
+
+    to_delete->next = nullptr;
+    to_delete->prev = nullptr;
+    delete to_delete;
+}
+
+template<typename E>
+void SoftHeap<E>::repeated_combine(SoftHeap *q, int k) {
+    Tree *t = q->first;
+    while(t->next != nullptr){
+        if (t->rank == t->next->rank)
+            if (t->next->next == nullptr || t->rank != t->next->next->rank){
+                t->root = combine(t->root, t->next->root);
+                t->rank = t->root->rank;
+                remove_tree(q, t->next);
+            }
+        else if (t->rank > k)
+            break;
+        t->next;
+    }
+
+    if (t->rank > q->rank)
+        q->rank = t->rank;
+    update_suffix_min(t);
+}

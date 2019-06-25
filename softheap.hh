@@ -56,7 +56,7 @@ private:
     void repeated_combine(SoftHeap *q, int k) = 0;
     void update_suffix_min(Tree *t) = 0;
     void insert_tree(SoftHeap *q, Tree *t1, Tree *t2) = 0;
-    void remove_tree(Tree *t) = 0;
+    void remove_tree(SoftHeap *q, Tree *t) = 0;
     Tree* make_tree(E e) = 0;
     Node* make_node(E e) = 0;
     bool leaf(Node *x) = 0;
