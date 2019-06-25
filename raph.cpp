@@ -43,7 +43,7 @@ void SoftHeap<E>::sift(Node *x) {
 template<typename E>
 typename SoftHeap<E>::Node* SoftHeap<E>::combine(Node *x, Node *y) {
     Node *z = new Node(x, y);
-    if (x->rank <= this->r)
+    if (x->rank <= this->max_node_rank)
         z->size = 1;
     else
         z->size = (3 * x->size + 1)/2;
@@ -126,4 +126,35 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int k) {
     if (t->rank > q->rank)
         q->rank = t->rank;
     update_suffix_min(t);
+}
+
+template<typename E>
+bool SoftHeap<E>::searchAndDestroy(Node *x, E e){
+    ListCell *l = x->list;
+    bool lft = false;
+    bool rgt = false;
+    while(l != nullptr){
+        if (l->elem == e){
+            /////
+            return true;
+        }
+        l = l->next;
+    }
+    if (x->left != nullptr)
+        lft = searchAndDestroy(x->left, e);
+    if (!lft && x->right != nullptr)
+        rgt = searchAndDestroy(x->right, e);
+    return lft || rgt;
+}
+
+template<typename E>
+bool SoftHeap<E>::deleteE(E e) {
+    Tree *t = this->first;
+    while(t != nullptr){
+        bool tmp = searchAndDestroy(t->root, e);
+        if (tmp)
+            return tmp;
+        t = t->next;
+    }
+    return false;
 }

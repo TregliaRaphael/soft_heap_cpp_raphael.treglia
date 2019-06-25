@@ -21,7 +21,7 @@ void swap(E* a, E* b)
 template<typename E>
 void SoftHeap<E>::meld(SoftHeap* Q)
 {
-    if (this->rank > Q.rank)
+    if (this->rank > Q->rank)
     {
         swap(this, Q);
     }

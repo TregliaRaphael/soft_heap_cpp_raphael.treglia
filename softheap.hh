@@ -40,29 +40,28 @@ struct SoftHeap {
     SoftHeap(E e);
     ~SoftHeap();
 
+    void insert(E e) = 0;
+    bool deleteE(E e) = 0;
+    void meld(SoftHeap *Q) = 0;
+    E extract_min() = 0;
+
 private:
     double epsilon;
     Tree *first;
     double max_node_rank;
     int rank;
 
-    /*FIXME*/
-  /*    void sift(Node *x) = 0;
+    void sift(Node *x) = 0;
     Node *combine(Node *x, Node *y) = 0;
-    void meld(SoftHeap *Q);
-    void insert(E e) = 0;
-    E extract_min() = 0;
+    bool searchAndDestroy(Node *x, E e) = 0;
     void merge_into(SoftHeap *q) = 0;
     void repeated_combine(SoftHeap *q, int k) = 0;
     void update_suffix_min(Tree *t) = 0;
     void insert_tree(SoftHeap *q, Tree *t1, Tree *t2) = 0;
     void remove_tree(SoftHeap *q, Tree *t) = 0;
-    Tree* make_tree(E e) = 0;
-    Node* make_node(E e) = 0;
     bool leaf(Node *x) = 0;
     void concatenate(ListCell *l1, ListCell *l2) = 0;
     E pick_elem(Node* x);
-    /*FIXME*/
 
 };
 
