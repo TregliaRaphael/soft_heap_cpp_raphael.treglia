@@ -64,7 +64,7 @@ private:
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E e) {
   this->elem = e;
-  this->next = null;
+  this->next = nullptr;
 }
 
 template<typename E>
@@ -73,8 +73,8 @@ SoftHeap<E>::Node::Node(E e) {
   this->rank = 0;
   this->size = 1;
   this->ckey = e;
-  this->left = null;
-  this->right = null;
+  this->left = nullptr;
+  this->right = nullptr;
 }
 
 template<typename E>
@@ -85,9 +85,6 @@ SoftHeap<E>::Tree::Tree(E e) {
   this->next = nullptr;
   this->suffmin = this;
 }
-
-
-
 
 template<typename E>
 SoftHeap<E>::SoftHeap(E e) {
