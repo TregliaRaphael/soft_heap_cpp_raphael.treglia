@@ -87,7 +87,7 @@
 		<Unit filename="/home/raph/Desktop/glp2/softheap.cpp">
 			<Option target="soft_heap_glp2"/>
 		</Unit>
-		<Unit filename="/home/raph/Desktop/glp2/softheap.h">
+		<Unit filename="/home/raph/Desktop/glp2/softheap.hh">
 			<Option target="soft_heap_glp2"/>
 		</Unit>
 		<Unit filename="/home/raph/Desktop/glp2/CMakeLists.txt">
