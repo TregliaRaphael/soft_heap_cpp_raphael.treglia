@@ -31,7 +31,22 @@ void SoftHeap<E>::meld(SoftHeap* Q)
     return Q;
 }
 
-E pick_elem(
+template<typename E>
+E pick_elem(SoftHeap<E>::Node x)
+{
+    SoftHeap<E>::ListCell* cpy = x->list;
+    SoftHeap<E>::ListCell* last = x->list;
+
+    while (cpy != nullptr)
+    {
+        last = cpy;
+        cpy = cpy->next;
+    }
+
+    E cpy_elem = last->elem;
+    delete[] last;
+    return cpy_elem;
+}
 
 template<typename E>
 E SoftHeap<E>::extract_min()
@@ -40,6 +55,18 @@ E SoftHeap<E>::extract_min()
         return nullptr;
 
     auto Tree = this->first->sufmin;
-    auto x = Tree->root;
-    auto e = 
+    Node* x = Tree->root;
+    E e = pick_elem(x);
+
+    if (x->list.size() <= x->size/2)
+    {
+        if (leaf(x) == nullptr)
+        {
+            sift(x);
+            update_suffix_min(Tree);
+        }
+        else if (x->list == nullptr)
+            remove_tree(this, Tree);
+    }
+    return e;
 }
