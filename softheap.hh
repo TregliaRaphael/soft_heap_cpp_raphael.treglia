@@ -12,7 +12,8 @@ struct SoftHeap {
     struct ListCell {
         E elem;
         ListCell *next;
-        ~ListCell();
+      ListCell(E e);
+      ~ListCell();
     };
 
     struct Node {
@@ -41,11 +42,11 @@ private:
     /*FIXME*/
     void sift(Node *x) = 0;
     Node *combine(Node *x, Node *y) = 0;
-    void meld(SoftHeap *Q) = 0;
+    void meld(SoftHeap *q) = 0;
     void insert(E e) = 0;
     E extract_min() = 0;
-    void merge_into(SoftHeap *Q) = 0;
-    void repeated_combine(SoftHeap *Q, E k) = 0;
+    void merge_into(SoftHeap *q) = 0;
+    void repeated_combine(SoftHeap *q, int k) = 0;
     void update_suffix_min(Tree t) = 0;
     void insert_tree(Tree t1, Tree t2) = 0;
     void remove_tree(Tree t) = 0;
@@ -58,6 +59,23 @@ private:
 
 
 /*CONSTRUCTORS*/
+
+template<typename E>
+SoftHeap<E>::ListCell::ListCell(E e) {
+  this->elem = e;
+  this->next = null;
+}
+
+/*template<typename E>
+SoftHeap<E>::Node::Node(E e) {
+  this->list.elem = e;
+  this->list.elem->next = null;
+  this->rank = 0;
+  this->size = 1;
+  this->ckey = e;
+  this->left = null;
+  this->right = null;
+  }*/
 
 
 template<typename E>
@@ -107,12 +125,3 @@ SoftHeap<E>::Node::~Node(){
     delete this->right;
     this->right = nullptr;
 }
-
-/*P1*/
-/**/
-
-/*P2*/
-/**/
-
-/*P3*/
-/**/
