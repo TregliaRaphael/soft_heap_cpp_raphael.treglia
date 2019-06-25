@@ -28,7 +28,8 @@ struct SoftHeap {
         Node *root;
         Tree *prev, *next, *sufmin;
         int rank;
-        ~Tree();
+      Tree(E e);
+      ~Tree();
     };
 
     SoftHeap(E e);
