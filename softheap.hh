@@ -77,15 +77,14 @@ SoftHeap<E>::Node::Node(E e) {
   this->right = null;
 }
 
-/*template<typename E>
+template<typename E>
 SoftHeap<E>::Tree::Tree(E e) {
-  this->list = new ListCell(e);
+  this->root = new Node(e);
   this->rank = 0;
-  this->size = 1;
-  this->ckey = e;
-  this->left = null;
-  this->right = null;
-  }*/
+  this->prev = nullptr;
+  this->next = nullptr;
+  this->suffmin = this;
+}
 
 
 
