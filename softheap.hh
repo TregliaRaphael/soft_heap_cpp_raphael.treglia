@@ -34,7 +34,7 @@ struct SoftHeap {
         int rank;
 
         Tree(E e);
-        ~Tree();
+      ~Tree();
     };
 
     SoftHeap(E e);
@@ -62,7 +62,6 @@ private:
     bool leaf(Node *x);
     void concatenate(ListCell *l1, ListCell *l2);
     E pick_elem(Node* x);
-
 };
 
 
@@ -124,23 +123,11 @@ SoftHeap<E>::~SoftHeap(){
 template<typename E>
 SoftHeap<E>::ListCell::~ListCell(){
     delete this->next;
-    std::cout << typeid(this->elem).name() << std::endl;
     this->next = nullptr;
     delete this->elem;
     this->elem = nullptr;
 }
 
-template<typename E>
-SoftHeap<E>::Tree::~Tree(){
-    delete this->root;
-    this->root = nullptr;
-    delete this->prev;
-    this->prev = nullptr;
-    delete this->next;
-    this->next = nullptr;
-    delete this->sufmin;
-    this->sufmin = nullptr;
-}
 
 template<typename E>
 SoftHeap<E>::Node::~Node(){
@@ -151,6 +138,29 @@ SoftHeap<E>::Node::~Node(){
     delete this->right;
     this->right = nullptr;
 }
+
+
+template<typename E>
+SoftHeap<E>::Tree::~Tree()
+{
+  /*
+  delete this->root;
+  this->root = nullptr;
+  this->prev = nullptr;
+  this->next =nullptr;
+
+    if (this->prev != nullptr)
+    {
+      delete this->prev;
+      this->prev = nullptr;
+    }
+
+  if ( this->next != nullptr)
+    {
+      delete this->next;
+      this->next = nullptr;
+  */
+      }
 
 template <typename E>
 void swap (E *a, E* b);
