@@ -21,13 +21,25 @@ void swap(E* a, E* b)
 template<typename E>
 void SoftHeap<E>::meld(SoftHeap* Q)
 {
-    if (this.rank > Q.rank)
+    if (this->rank > Q.rank)
     {
         swap(this, Q);
     }
 
     merge_into(this,Q);
-    repeated_combine(Q,this.rank);
+    repeated_combine(Q,this->rank);
     return Q;
 }
 
+E pick_elem(
+
+template<typename E>
+E SoftHeap<E>::extract_min()
+{
+    if (this->first == nullptr)
+        return nullptr;
+
+    auto Tree = this->first->sufmin;
+    auto x = Tree->root;
+    auto e = 
+}
