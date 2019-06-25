@@ -31,7 +31,15 @@ void SoftHeap<E>::meld(SoftHeap* Q)
     return Q;
 }
 
-E pick_elem(
+void pick_elem(SoftHeap<E>::ListCell list, E x)
+{
+    SoftHeap<E>::ListCell* cpy = list;
+
+    while(cpy->next != nullptr)
+    {
+        
+    }
+}
 
 template<typename E>
 E SoftHeap<E>::extract_min()
