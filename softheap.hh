@@ -93,7 +93,7 @@ SoftHeap<E>::SoftHeap(E e) {
     this->epsilon = 0.5;
     this->rank = 0;
     this->max_node_rank = log2(1. / this->epsilon) + 5;
-    this->first = make_tree(e);
+    this->first = new Tree(e);
 }
 
 
@@ -135,3 +135,6 @@ SoftHeap<E>::Node::~Node(){
     delete this->right;
     this->right = nullptr;
 }
+
+/*template <typename E>
+  void swap (E *a, E* b);*/
