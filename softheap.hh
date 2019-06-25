@@ -49,7 +49,7 @@ private:
     /*FIXME*/
   /*    void sift(Node *x) = 0;
     Node *combine(Node *x, Node *y) = 0;
-    void meld(SoftHeap *q) = 0;
+    void meld(SoftHeap *Q);
     void insert(E e) = 0;
     E extract_min() = 0;
     void merge_into(SoftHeap *q) = 0;
@@ -61,7 +61,7 @@ private:
     Node* make_node(E e) = 0;
     bool leaf(Node *x) = 0;
     void concatenate(ListCell *l1, ListCell *l2) = 0;
-    E pick_elem(SoftHeap<E>::Node x);
+    E pick_elem(Node* x);
     /*FIXME*/
 
 };
