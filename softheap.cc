@@ -17,10 +17,28 @@ void swap(E *a, E *b) {
 
 
 template<typename E>
+void SoftHeap<E>::thisSwap(SoftHeap *Q){
+    Tree *tQ = Q->first;
+    int maxQ = Q->max_node_rank;
+    int rkQ = Q->rank;
+    int epsQ = Q->epsilon;
+
+    Q->first = this->first;
+    Q->max_node_rank = this->max_node_rank;
+    Q->rank = this->rank;
+    Q->epsilon = this->epsilon;
+
+    this->first = tQ;
+    this->max_node_rank = maxQ;
+    this-> rank = rkQ;
+    this->epsilon = epsQ;
+}
+
+
+template<typename E>
 void SoftHeap<E>::meld(SoftHeap *Q) {
-    if (this->rank > Q->rank) {
-        swap(this, Q);
-    }//FIXME
+    if (this->rank > Q->rank)
+        thisSwap(Q);
 
     merge_into(Q);
     repeated_combine(Q, this->rank);
@@ -95,17 +113,12 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
         n1->list = n2->list;
     else if (n2->list == nullptr)
         return;
-    else
-        concatenateRec(n1->list, n2->list);
-}
-
-
-template<typename E>
-void SoftHeap<E>::concatenateRec(ListCell *l1, ListCell *l2) {
-    if (l1->next == nullptr)
-        l1->next = l2;
-    else
-        concatenateRec(l1->next, l2);
+    else{
+        ListCell *l = n1->list;
+        while(l->next != nullptr)
+            l = l->next;
+        l->next = n2->list;
+    }
 }
 
 
@@ -117,10 +130,11 @@ void SoftHeap<E>::sift(Node *x) {
 
         concatenate(x, x->left);
         x->ckey = x->left->ckey;
-        //delete x->left->list;
 
-        if (leaf(x->left))
+        if (leaf(x->left)) {
             delete x->left;
+            x->left = nullptr;
+        }
         else
             sift(x->left);
     }
@@ -170,13 +184,14 @@ void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
         q->first = t1;
     else
         t2->prev->next = t1;
+    t2->prev = t1;
 }
 
 
 template<typename E>
 void SoftHeap<E>::update_suffix_min(Tree *t) {
     while (t != nullptr) {
-        if (t->root->ckey <= t->next->sufmin->root->ckey)
+        if (t->next == nullptr || t->root->ckey <= t->next->sufmin->root->ckey)
             t->sufmin = t;
         else
             t->sufmin = t->next->sufmin;

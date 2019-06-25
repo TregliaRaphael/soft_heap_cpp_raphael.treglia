@@ -7,13 +7,6 @@
 #include <cmath>
 #include <typeinfo>
 
-/*DELETE AND SET NULL*/
-template<typename E>
-void delAndSetNullptr(E *e){
-    delete e;
-    e = nullptr;
-}
-
 template<typename E>
 struct SoftHeap {
     struct ListCell {
@@ -69,9 +62,10 @@ private:
     void remove_tree(SoftHeap *q, Tree *t);
     bool leaf(Node *x);
     void concatenate(Node *n1, Node *n2);
-    void concatenateRec(ListCell *l1, ListCell *l2);
+    //void concatenateRec(ListCell *l1, ListCell *l2);
     E pick_elem(Node* x);
     void swapLR(Node *x);
+    void thisSwap(SoftHeap *Q);
 };
 
 
@@ -128,38 +122,50 @@ SoftHeap<E>::SoftHeap(E e) {
 
 template<typename E>
 SoftHeap<E>::~SoftHeap(){
-    if (this->first != nullptr)
-        delAndSetNullptr(this->first);
+    if (this->first != nullptr){
+        delete this->first;
+        this->first = nullptr;
+    }
 }
 
 template<typename E>
 SoftHeap<E>::ListCell::~ListCell(){
-    if (this->next != nullptr)
-        delAndSetNullptr(this->next);
-    /*if (this->elem != nullptr)
-        delAndSetNullptr(this->elem);*/
+    if (this->next != nullptr){
+        delete this->next;
+        this->next = nullptr;
+    }
 }
 
 template<typename E>
 SoftHeap<E>::Node::~Node(){
-    if (this->list != nullptr)
-        delAndSetNullptr(this->list);
-    if (this->left != nullptr)
-        delAndSetNullptr(this->left);
-    if (this->right != nullptr)
-        delAndSetNullptr(this->right);
-    /*if (this->ckey != nullptr)
-        delAndSetNullptr(this->ckey);*/
+    if (this->list != nullptr){
+        delete this->list;
+        this->list = nullptr;
+    }
+    if (this->left != nullptr){
+        delete this->left;
+        this->left = nullptr;
+    }
+    if (this->right != nullptr){
+        delete this->right;
+        this->right = nullptr;
+    }
 }
 
 template<typename E>
 SoftHeap<E>::Tree::~Tree(){
-    if (this->root != nullptr)
-        delAndSetNullptr(this->root);
-    if (this->prev != nullptr)
-        delAndSetNullptr(this->prev);
-    if (this->next != nullptr)
-        delAndSetNullptr(this->next);
+    if (this->root != nullptr){
+        delete this->root;
+        this->root = nullptr;
+    }
+    if (this->prev != nullptr){
+        delete this->prev;
+        this->prev = nullptr;
+    }
+    if (this->next != nullptr){
+        delete this->next;
+        this->next = nullptr;
+    }
     /*if (this->sufmin != nullptr)
      * SUFMIN WAS AMONG NEXT AND PREV => Don't need to delete it then
         delAndSetNullptr(this->sufmin);*/
