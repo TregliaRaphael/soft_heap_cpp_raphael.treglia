@@ -41,11 +41,11 @@ private:
     /*FIXME*/
     void sift(Node *x) = 0;
     Node *combine(Node *x, Node *y) = 0;
-    void meld(SoftHeap *q) = 0;
+    void meld(SoftHeap *Q) = 0;
     void insert(E e) = 0;
     E extract_min() = 0;
-    void merge_into(SoftHeap *q) = 0;
-    void repeated_combine(SoftHeap *q, E k) = 0;
+    void merge_into(SoftHeap *Q) = 0;
+    void repeated_combine(SoftHeap *Q, E k) = 0;
     void update_suffix_min(Tree t) = 0;
     void insert_tree(Tree t1, Tree t2) = 0;
     void remove_tree(Tree t) = 0;
