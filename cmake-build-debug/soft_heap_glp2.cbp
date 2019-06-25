@@ -87,9 +87,6 @@
 		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/raph.cpp">
 			<Option target="soft_heap_glp2"/>
 		</Unit>
-		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/raph.h">
-			<Option target="soft_heap_glp2"/>
-		</Unit>
 		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cpp">
 			<Option target="soft_heap_glp2"/>
 		</Unit>
