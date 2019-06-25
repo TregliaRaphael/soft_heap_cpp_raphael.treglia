@@ -117,40 +117,48 @@ SoftHeap<E>::SoftHeap(E e) {
 
 template<typename E>
 SoftHeap<E>::~SoftHeap(){
-    delete this->first;
-    this->first = nullptr;
+    if (this->prev != nullptr)
+        delAndSetNullptr(this->first);
 }
 
 template<typename E>
 SoftHeap<E>::ListCell::~ListCell(){
-    delete this->next;
-    std::cout << typeid(this->elem).name() << std::endl;
-    this->next = nullptr;
-    delete this->elem;
-    this->elem = nullptr;
-}
-
-template<typename E>
-SoftHeap<E>::Tree::~Tree(){
-    delete this->root;
-    this->root = nullptr;
-    delete this->prev;
-    this->prev = nullptr;
-    delete this->next;
-    this->next = nullptr;
-    delete this->sufmin;
-    this->sufmin = nullptr;
+    if (this->prev != nullptr)
+        delAndSetNullptr(this->next);
+    if (this->prev != nullptr)
+        delAndSetNullptr(this->elem);
 }
 
 template<typename E>
 SoftHeap<E>::Node::~Node(){
-    delete this->list;
-    this->list = nullptr;
-    delete this->left;
-    this->left = nullptr;
-    delete this->right;
-    this->right = nullptr;
+    if (this->list != nullptr)
+        delAndSetNullptr(this->list);
+    if (this->left != nullptr)
+        delAndSetNullptr(this->left);
+    if (this->right != nullptr)
+        delAndSetNullptr(this->right);
 }
+
+template<typename E>
+SoftHeap<E>::Tree::~Tree(){
+    if (this->root != nullptr)
+        delAndSetNullptr(this->root);
+    if (this->prev != nullptr)
+        delAndSetNullptr(this->prev);
+    if (this->next != nullptr)
+        delAndSetNullptr(this->next);
+    if (this->prev != nullptr)
+        delAndSetNullptr(this->sufmin);
+}
+
+/*SWAP DEC*/
 
 template <typename E>
 void swap (E *a, E* b);
+
+/*DELETE AND SET NULL*/
+template<typename E>
+void delAndSetNullptr(E *e){
+    delete e;
+    e = nullptr;
+}

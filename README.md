@@ -1,3 +1,3 @@
 ### SOFT HEAP Project C++ project replacement
 
-## Soft Heap varian from kaplan choosen => the one with the BTree
+## Soft Heap variante from kaplan choosen => the one with the BTree
