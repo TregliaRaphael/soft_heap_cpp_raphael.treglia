@@ -48,10 +48,10 @@ RM = /usr/idea/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/raph/Desktop/glp2
+CMAKE_SOURCE_DIR = /home/raph/Desktop/soft_heap_cpp_raphael.treglia
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raph/Desktop/glp2/cmake-build-debug
+CMAKE_BINARY_DIR = /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles /home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ soft_heap_glp2/fast:
 	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/build
 .PHONY : soft_heap_glp2/fast
 
+raph.o: raph.cpp.o
+
+.PHONY : raph.o
+
+# target to build an object file
+raph.cpp.o:
+	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/raph.cpp.o
+.PHONY : raph.cpp.o
+
+raph.i: raph.cpp.i
+
+.PHONY : raph.i
+
+# target to preprocess a source file
+raph.cpp.i:
+	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/raph.cpp.i
+.PHONY : raph.cpp.i
+
+raph.s: raph.cpp.s
+
+.PHONY : raph.s
+
+# target to generate assembly for a file
+raph.cpp.s:
+	$(MAKE) -f CMakeFiles/soft_heap_glp2.dir/build.make CMakeFiles/soft_heap_glp2.dir/raph.cpp.s
+.PHONY : raph.cpp.s
+
 softheap.o: softheap.cpp.o
 
 .PHONY : softheap.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... soft_heap_glp2"
 	@echo "... edit_cache"
+	@echo "... raph.o"
+	@echo "... raph.i"
+	@echo "... raph.s"
 	@echo "... softheap.o"
 	@echo "... softheap.i"
 	@echo "... softheap.s"

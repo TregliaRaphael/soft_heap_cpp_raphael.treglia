@@ -60,6 +60,7 @@ private:
     Tree* make_tree(E e) = 0;
     Node* make_node(E e) = 0;
     bool leaf(Node *x) = 0;
+    void concatenate(ListCell *l1, ListCell *l2) = 0;
     /*FIXME*/
 
 };

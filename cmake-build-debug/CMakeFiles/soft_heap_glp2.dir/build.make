@@ -43,10 +43,10 @@ RM = /usr/idea/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/raph/Desktop/glp2
+CMAKE_SOURCE_DIR = /home/raph/Desktop/soft_heap_cpp_raphael.treglia
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raph/Desktop/glp2/cmake-build-debug
+CMAKE_BINARY_DIR = /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/soft_heap_glp2.dir/depend.make
@@ -59,28 +59,43 @@ include CMakeFiles/soft_heap_glp2.dir/flags.make
 
 CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o: CMakeFiles/soft_heap_glp2.dir/flags.make
 CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o: ../softheap.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o -c /home/raph/Desktop/glp2/softheap.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o -c /home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cpp
 
 CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/raph/Desktop/glp2/softheap.cpp > CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cpp > CMakeFiles/soft_heap_glp2.dir/softheap.cpp.i
 
 CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raph/Desktop/glp2/softheap.cpp -o CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cpp -o CMakeFiles/soft_heap_glp2.dir/softheap.cpp.s
+
+CMakeFiles/soft_heap_glp2.dir/raph.cpp.o: CMakeFiles/soft_heap_glp2.dir/flags.make
+CMakeFiles/soft_heap_glp2.dir/raph.cpp.o: ../raph.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/soft_heap_glp2.dir/raph.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/soft_heap_glp2.dir/raph.cpp.o -c /home/raph/Desktop/soft_heap_cpp_raphael.treglia/raph.cpp
+
+CMakeFiles/soft_heap_glp2.dir/raph.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/soft_heap_glp2.dir/raph.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/raph/Desktop/soft_heap_cpp_raphael.treglia/raph.cpp > CMakeFiles/soft_heap_glp2.dir/raph.cpp.i
+
+CMakeFiles/soft_heap_glp2.dir/raph.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/soft_heap_glp2.dir/raph.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raph/Desktop/soft_heap_cpp_raphael.treglia/raph.cpp -o CMakeFiles/soft_heap_glp2.dir/raph.cpp.s
 
 # Object files for target soft_heap_glp2
 soft_heap_glp2_OBJECTS = \
-"CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o"
+"CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o" \
+"CMakeFiles/soft_heap_glp2.dir/raph.cpp.o"
 
 # External object files for target soft_heap_glp2
 soft_heap_glp2_EXTERNAL_OBJECTS =
 
 libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/softheap.cpp.o
+libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/raph.cpp.o
 libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/build.make
 libsoft_heap_glp2.a: CMakeFiles/soft_heap_glp2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libsoft_heap_glp2.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libsoft_heap_glp2.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/soft_heap_glp2.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/soft_heap_glp2.dir/link.txt --verbose=$(VERBOSE)
 
@@ -94,6 +109,6 @@ CMakeFiles/soft_heap_glp2.dir/clean:
 .PHONY : CMakeFiles/soft_heap_glp2.dir/clean
 
 CMakeFiles/soft_heap_glp2.dir/depend:
-	cd /home/raph/Desktop/glp2/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/raph/Desktop/glp2 /home/raph/Desktop/glp2 /home/raph/Desktop/glp2/cmake-build-debug /home/raph/Desktop/glp2/cmake-build-debug /home/raph/Desktop/glp2/cmake-build-debug/CMakeFiles/soft_heap_glp2.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/raph/Desktop/soft_heap_cpp_raphael.treglia /home/raph/Desktop/soft_heap_cpp_raphael.treglia /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/CMakeFiles/soft_heap_glp2.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/soft_heap_glp2.dir/depend
 

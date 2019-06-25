@@ -16,7 +16,15 @@ int SoftHeap<E>::ListCell::size() {
 }
 
 template<typename E>
-void SoftHeap<E>::sift(SoftHeap::Node *x) {
+void SoftHeap<E>::concatenate(ListCell *l1, ListCell *l2){
+    if (l1->next == nullptr)
+        l1->next = l2;
+    else
+        concatenate(l1->next,l2);
+}
+
+template<typename E>
+void SoftHeap<E>::sift(Node *x) {
     while(x->list->size() < x->size && !leaf(x)){
         if (x->left == nullptr || (x->right != nullptr && x->left->ckey > x->right->ckey))
             swap(x->left, x->right);
@@ -33,12 +41,18 @@ void SoftHeap<E>::sift(SoftHeap::Node *x) {
 }
 
 template<typename E>
-typename SoftHeap<E>::Node* SoftHeap<E>::combine(SoftHeap<E>::Node *x, SoftHeap<E>::Node *y) {
-    SoftHeap<E>::Node z = new SoftHeap<E>::Node();
+typename SoftHeap<E>::Node* SoftHeap<E>::combine(Node *x, Node *y) {
+    Node *z = new Node(x, y);
+    if (x->rank <= this->r)
+        z->size = 1;
+    else
+        z->size = (3 * x->size + 1)/2;
+    sift(z);
+    return z;
 }
 
 template<typename E>
 bool SoftHeap<E>::leaf(Node *x) {
     return x->left == nullptr && x->right == nullptr;
-
 }
+
