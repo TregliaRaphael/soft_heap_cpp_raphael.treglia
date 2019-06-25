@@ -12,8 +12,9 @@ struct SoftHeap {
     struct ListCell {
         E elem;
         ListCell *next;
-      ListCell(E e);
-      ~ListCell();
+        int size();
+        ListCell(E e);
+        ~ListCell();
     };
 
     struct Node {
