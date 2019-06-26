@@ -41,6 +41,8 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
         thisSwap(Q);
 
     merge_into(Q);
+    //SEEMS ALWAYS GOOD AFTER MERGE_INTO
+    //The tricky one seems to be repeated_combine
     repeated_combine(Q, this->rank);
 
     Tree *cpy = this->first;
@@ -132,6 +134,11 @@ void SoftHeap<E>::sift(Node *x) {
         concatenate(x, x->left);
         x->ckey = x->left->ckey;
 
+        // CARE FROM THIS LINE, here because when concate,
+        // we put addr in x, then we don't want to delete the addr,
+        // that's why i'm setting x->left->list to nullptr
+        x->left->list = nullptr;
+
         if (leaf(x->left)) {
             delete x->left;
             x->left = nullptr;
@@ -222,7 +229,9 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
         if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
             t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
+            //FIXME STORE T->NEXT
             remove_tree(q, t->next);
+            //FIXME DELETE T->NEXT
         } else if (t->rank > rk)
             break;
         else
