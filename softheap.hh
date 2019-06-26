@@ -55,13 +55,14 @@ struct SoftHeap {
 
     E extract_min();
 
-private:
-    double epsilon;
-    Tree *first;
-    int max_node_rank;
-    int rank;
+  double epsilon;
+  Tree *first;
+  int max_node_rank;
+  int rank;
+  
 
-    void sift(Node *x);
+private:
+      void sift(Node *x);
 
     Node *combine(Node *x, Node *y);
 
@@ -86,6 +87,7 @@ private:
     void swapLR(Node *x);
 
     void thisSwap(SoftHeap *Q);
+
 };
 
 
