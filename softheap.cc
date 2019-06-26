@@ -293,12 +293,21 @@ bool SoftHeap<E>::deleteE(E e) {
     return false;
 }
 
-/*
+
 int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
     s->insert(3);
-    s->insert(3);
+    s->insert(4);
     s->insert(6);
+
+    SoftHeap<int> *nw = new SoftHeap<int>(2);
+    nw->insert(2);
+    nw->insert(3);
+
+
+    s->meld(nw);
+
     std::cout << "CREATE SOFT HEAP WORKS" << std::endl;
     delete s;
-    }*/
+    //delete nw;
+    }

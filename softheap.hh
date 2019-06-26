@@ -9,84 +9,84 @@
 
 template<typename E>
 struct SoftHeap {
-	struct ListCell {
-		E elem;
-		ListCell *next;
+    struct ListCell {
+        E elem;
+        ListCell *next;
 
-		int size();
+        int size();
 
-		ListCell(E e);
+        ListCell(E e);
 
-		~ListCell();
-	};
+        ~ListCell();
+    };
 
-	struct Node {
-		int rank{}, size{};
-		E ckey;
-		Node *left, *right;
-		ListCell *list;
+    struct Node {
+        int rank{}, size{};
+        E ckey;
+        Node *left, *right;
+        ListCell *list;
 
-		Node(Node *l, Node *r);
+        Node(Node *l, Node *r);
 
-		Node(E e);
+        Node(E e);
 
-		~Node();
-	};
+        ~Node();
+    };
 
-	struct Tree {
-		Node *root;
-		Tree *prev, *next, *sufmin;
-		int rank;
+    struct Tree {
+        Node *root;
+        Tree *prev, *next, *sufmin;
+        int rank;
 
-		Tree(E e);
+        Tree(E e);
 
-		~Tree();
-	};
+        ~Tree();
+    };
 
-	SoftHeap(E e);
+    SoftHeap(E e);
 
-	~SoftHeap();
+    ~SoftHeap();
 
-	void insert(E e);
+    void insert(E e);
 
-	bool deleteE(E e);
+    bool deleteE(E e);
 
-	void meld(SoftHeap *Q);
+    void meld(SoftHeap *Q);
 
-	E extract_min();
+    E extract_min();
 
-	double epsilon;
-	Tree *first;
-	int max_node_rank;
-	int rank;
+    double epsilon;
+    Tree *first;
+    int max_node_rank;
+    int rank;
 
 
-	private:
-	void sift(Node *x);
+    private:
+    void sift(Node *x);
 
-	Node *combine(Node *x, Node *y);
+    Node *combine(Node *x, Node *y);
 
-	bool searchAndDestroy(Node *x, E e);
+    bool searchAndDestroy(Node *x, E e);
 
-	void merge_into(SoftHeap *q);
+    void merge_into(SoftHeap *q);
 
-	void repeated_combine(SoftHeap *q, int rk);
+    void repeated_combine(SoftHeap *q, int rk);
 
-	void update_suffix_min(Tree *t);
+    void update_suffix_min(Tree *t);
 
-	void insert_tree(SoftHeap *q, Tree *t1, Tree *t2);
+    void insert_tree(SoftHeap *q, Tree *t1, Tree *t2);
 
-	void remove_tree(SoftHeap *q, Tree *t);
+    void remove_tree(SoftHeap *q, Tree *t);
 
-	bool leaf(Node *x);
+    bool leaf(Node *x);
 
-	void concatenate(Node *n1, Node *n2);
+    void concatenate(Node *n1, Node *n2);
 
-	E pick_elem(Node *x);
+    E pick_elem(Node *x);
 
-	void swapLR(Node *x);
+    void swapLR(Node *x);
 
-	void thisSwap(SoftHeap *Q);
+    void thisSwap(SoftHeap *Q);
 
 };
 
@@ -96,46 +96,46 @@ struct SoftHeap {
 //FIXME NEW E
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E e) {
-	this->elem = e;
-	this->next = nullptr;
+    this->elem = e;
+    this->next = nullptr;
 }
 
 template<typename E>
 SoftHeap<E>::Node::Node(SoftHeap<E>::Node *l, SoftHeap<E>::Node *r) {
-	this->list = nullptr;
-	this->rank = l->rank + 1;
-	this->size = 0;
-	this->ckey = 0;
-	this->left = l;
-	this->right = r;
+    this->list = nullptr;
+    this->rank = l->rank + 1;
+    this->size = 0;
+    this->ckey = 0;
+    this->left = l;
+    this->right = r;
 }
 
 //FIXME NEW E
 template<typename E>
 SoftHeap<E>::Node::Node(E e) {
-	this->list = new ListCell(e);
-	this->rank = 0;
-	this->size = 1;
-	this->ckey = e;
-	this->left = nullptr;
-	this->right = nullptr;
+    this->list = new ListCell(e);
+    this->rank = 0;
+    this->size = 1;
+    this->ckey = e;
+    this->left = nullptr;
+    this->right = nullptr;
 }
 
 template<typename E>
 SoftHeap<E>::Tree::Tree(E e) {
-	this->root = new Node(e);
-	this->rank = 0;
-	this->prev = nullptr;
-	this->next = nullptr;
-	this->sufmin = this;
+    this->root = new Node(e);
+    this->rank = 0;
+    this->prev = nullptr;
+    this->next = nullptr;
+    this->sufmin = this;
 }
 
 template<typename E>
 SoftHeap<E>::SoftHeap(E e) {
-	this->epsilon = 0.1;
-	this->rank = 0;
-	this->max_node_rank = log2(1. / this->epsilon) + 5;
-	this->first = new Tree(e);
+    this->epsilon = 0.1;
+    this->rank = 0;
+    this->max_node_rank = log2(1. / this->epsilon) + 5;
+    this->first = new Tree(e);
 }
 
 
@@ -144,48 +144,50 @@ SoftHeap<E>::SoftHeap(E e) {
 
 template<typename E>
 SoftHeap<E>::~SoftHeap() {
-	if (this->first != nullptr) {
-		delete this->first;
-		this->first = nullptr;
-	}
+    if (this->first != nullptr) {
+        delete this->first;
+        this->first = nullptr;
+    }
 }
 
 template<typename E>
 SoftHeap<E>::ListCell::~ListCell() {
-	if (this->next != nullptr) {
-		delete this->next;
-		this->next = nullptr;
-	}
+    if (this->next != nullptr) {
+        delete this->next;
+        this->next = nullptr;
+    }
 }
 
 template<typename E>
 SoftHeap<E>::Node::~Node() {
-	if (this->list != nullptr) {
-		delete this->list;
-		this->list = nullptr;
-	}
-	if (this->left != nullptr) {
-		delete this->left;
-		this->left = nullptr;
-	}
-	if (this->right != nullptr) {
-		delete this->right;
-		this->right = nullptr;
-	}
+    if (this->list != nullptr) {
+        delete this->list;
+        this->list = nullptr;
+    }
+    if (this->left != nullptr) {
+        delete this->left;
+        this->left = nullptr;
+    }
+    if (this->right != nullptr) {
+        delete this->right;
+        this->right = nullptr;
+    }
 }
 
 template<typename E>
 SoftHeap<E>::Tree::~Tree() {
-	if (this->root != nullptr) {
-		delete this->root;
-		this->root = nullptr;
-	}
-	if (this->prev != nullptr) {
-		delete this->prev;
-		this->prev = nullptr;
-	}
-	if (this->next != nullptr) {
-		delete this->next;
-		this->next = nullptr;
-	}
+    if (this->root != nullptr) {
+        delete this->root;
+        this->root = nullptr;
+    }
+    if (this->prev != nullptr) {
+        this->prev->next = nullptr;
+        delete this->prev;
+        this->prev = nullptr;
+    }
+    if (this->next != nullptr) {
+        this->next->prev = nullptr;
+        delete this->next;
+        this->next = nullptr;
+    }
 }
