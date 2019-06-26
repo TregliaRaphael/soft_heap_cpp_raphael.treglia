@@ -9,7 +9,7 @@ void SoftHeap<E>::insert(E e) {
 
 
 template<typename E>
-void SoftHeap<E>::swapLR (Node *x){
+void SoftHeap<E>::swapLR(Node *x) {
     Node *tmp = x->left;
     x->left = x->right;
     x->right = tmp;
@@ -17,7 +17,7 @@ void SoftHeap<E>::swapLR (Node *x){
 
 
 template<typename E>
-void SoftHeap<E>::thisSwap(SoftHeap *Q){
+void SoftHeap<E>::thisSwap(SoftHeap *Q) {
     Tree *tQ = Q->first;
     int maxQ = Q->max_node_rank;
     int rkQ = Q->rank;
@@ -30,7 +30,7 @@ void SoftHeap<E>::thisSwap(SoftHeap *Q){
 
     this->first = tQ;
     this->max_node_rank = maxQ;
-    this-> rank = rkQ;
+    this->rank = rkQ;
     this->epsilon = epsQ;
 }
 
@@ -110,9 +110,9 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
         n1->list = n2->list;
     else if (n2->list == nullptr)
         return;
-    else{
+    else {
         ListCell *l = n1->list;
-        while(l->next != nullptr)
+        while (l->next != nullptr)
             l = l->next;
         l->next = n2->list;
     }
@@ -136,8 +136,7 @@ void SoftHeap<E>::sift(Node *x) {
         if (leaf(x->left)) {
             delete x->left;
             x->left = nullptr;
-        }
-        else
+        } else
             sift(x->left);
     }
 }
@@ -185,8 +184,7 @@ void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
     if (t2->prev == nullptr) {
         q->first = t1;
         this->first = nullptr;
-    }
-    else
+    } else
         t2->prev->next = t1;
     t2->prev = t1;
 
