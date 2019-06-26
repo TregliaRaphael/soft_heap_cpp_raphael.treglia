@@ -70,9 +70,11 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     //The tricky one seems to be repeated_combine
     repeated_combine(Q, this->rank);
 
-    Tree *cpy = this->first;
+    //    Tree *cpy = this->first;
     thisSwap(Q);
-    delete cpy;
+    //    delete cpy;
+    delete Q;
+    
 }
 
 
@@ -153,6 +155,7 @@ void SoftHeap<E>::sift(Node *x) {
         concatenate(x, x->left);
         x->ckey = x->left->ckey;
 
+	
         // CARE FROM THIS LINE, here because when concate,
         // we put addr in x, then we don't want to delete the addr,
         // that's why i'm setting x->left->list to nullptr
@@ -247,7 +250,9 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
             t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
             //FIXME STORE T->NEXT
+	    Tree * todelete = t->next;
             remove_tree(q, t->next);
+	    delete todelete;
             //FIXME DELETE T->NEXT
         } else if (t->rank > rk)
             break;
@@ -324,21 +329,32 @@ E SoftHeap<E>::deleteE(E e) {
     return NULL;
 }
 
+int main()  {
+  
+  SoftHeap<int> *tr1 = new SoftHeap<int>(50);
+  SoftHeap<int> *tr2 = new SoftHeap<int>(14);
+  //  SoftHeap<int> * SoftHeap(4);
+  tr1->insert_tree(tr2,tr1->first,tr2->first);
+  delete tr1;
+  delete tr2;
+  //  delete sh;
+  }
+  
 
-int main() {
+/*int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
-    s->insert(3);
-    s->insert(4);
-    s->insert(6);
+     s->insert(3);
+     s->insert(4);
+   s->insert(6);
 
-    SoftHeap<int> *nw = new SoftHeap<int>(2);
+        SoftHeap<int> *nw = new SoftHeap<int>(2);
     nw->insert(2);
     nw->insert(3);
 
 
     s->meld(nw);
 
-    std::cout << "CREATE SOFT HEAP WORKS" << std::endl;
-    delete s;
-    //delete nw;
-    }
+    std::cout << "CREATE SOFT HEAP WORKS" << std::endl;*/
+//          delete s;
+ //delete nw;
+//}
