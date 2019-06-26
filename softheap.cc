@@ -4,8 +4,7 @@
 
 template<typename E>
 void SoftHeap<E>::insert(E e) {
-    auto tmp = new SoftHeap<E>(e);
-    meld(tmp);
+    meld(new SoftHeap<E>(e));
 }
 
 
@@ -226,7 +225,8 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
             remove_tree(q, t->next);
         } else if (t->rank > rk)
             break;
-        t->next;
+        else
+            t = t->next;
     }
 
     if (t->rank > q->rank)
@@ -271,7 +271,7 @@ bool SoftHeap<E>::deleteE(E e) {
 int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
     s->insert(3);
-    s->insert(4);
+    s->insert(3);
     s->insert(6);
     std::cout << "CREATE SOFT HEAP WORKS" << std::endl;
     delete s;
