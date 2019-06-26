@@ -49,7 +49,7 @@ struct SoftHeap {
 
     void insert(E e);
 
-    bool deleteE(E e);
+    E deleteE(E e);
 
     void meld(SoftHeap *Q);
 
@@ -66,7 +66,7 @@ struct SoftHeap {
 
     Node *combine(Node *x, Node *y);
 
-    bool searchAndDestroy(Node *x, E e);
+    E searchAndDestroy(Node *parent, Node *child, E e);
 
     void merge_into(SoftHeap *q);
 

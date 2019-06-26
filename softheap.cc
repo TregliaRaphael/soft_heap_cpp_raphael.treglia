@@ -262,35 +262,66 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
 
 
 template<typename E>
-bool SoftHeap<E>::searchAndDestroy(Node *x, E e) {
-    ListCell *l = x->list;
-    bool lft = false;
-    bool rgt = false;
+E SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E e) {
+    ListCell *l = child->list;
+    E lft = NULL;
+    E rgt = NULL;
     while (l != nullptr) {
         if (l->elem == e) {
-            /////FIXME DELETE ELEM
-            return true;
+            //DO MY DELETE BEHAVIOR FROM PSEUDO CODE
+            return e;
         }
         l = l->next;
     }
-    if (x->left != nullptr)
-        lft = searchAndDestroy(x->left, e);
-    if (!lft && x->right != nullptr)
-        rgt = searchAndDestroy(x->right, e);
-    return lft || rgt;
+    if (child->left != nullptr) {
+        lft = searchAndDestroy(child, child->left, e);
+        if (lft != NULL)
+            return lft;
+    }
+
+    if (child->right != nullptr) {
+        rgt = searchAndDestroy(child, child->right, e);
+        if (rgt != NULL)
+            return rgt;
+    }
+    return NULL;
 }
 
 
 template<typename E>
-bool SoftHeap<E>::deleteE(E e) {
+E SoftHeap<E>::deleteE(E e) {
     Tree *t = this->first;
     while (t != nullptr) {
-        bool tmp = searchAndDestroy(t->root, e);
-        if (tmp)
-            return tmp;
+
+        /******/
+
+        ListCell *l = t->root->list;
+        E lft = NULL;
+        E rgt = NULL;
+        while (l != nullptr) {
+            if (l->elem == e) {
+                //DO MY DELETE BEHAVIOR FROM PSEUDO CODE
+                return e;
+            }
+            l = l->next;
+        }
+        if (t->root->left != nullptr) {
+            lft = searchAndDestroy(t->root, t->root->left, e);
+            if (lft != NULL)
+                return lft;
+        }
+
+        if (t->root->right != nullptr) {
+            rgt = searchAndDestroy(t->root, t->root->right, e);
+            if (rgt != NULL)
+                return rgt;
+        }
+
+        /******/
+
         t = t->next;
     }
-    return false;
+    return NULL;
 }
 
 
