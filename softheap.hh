@@ -46,26 +46,27 @@ struct SoftHeap {
     void meld(SoftHeap *Q);
     E extract_min();
 
-private:
-    double epsilon;
-    Tree *first;
-    int max_node_rank;
-    int rank;
 
-    void sift(Node *x);
-    Node *combine(Node *x, Node *y);
-    bool searchAndDestroy(Node *x, E e);
-    void merge_into(SoftHeap *q);
-    void repeated_combine(SoftHeap *q, int rk);
-    void update_suffix_min(Tree *t);
-    void insert_tree(SoftHeap *q, Tree *t1, Tree *t2);
-    void remove_tree(SoftHeap *q, Tree *t);
-    bool leaf(Node *x);
-    void concatenate(Node *n1, Node *n2);
-    //void concatenateRec(ListCell *l1, ListCell *l2);
-    E pick_elem(Node* x);
-    void swapLR(Node *x);
-    void thisSwap(SoftHeap *Q);
+    private:
+        double epsilon;
+        Tree *first;
+        int max_node_rank;
+        int rank;
+
+        void sift(Node *x);
+        Node *combine(Node *x, Node *y);
+        bool searchAndDestroy(Node *x, E e);
+        void merge_into(SoftHeap *q);
+        void repeated_combine(SoftHeap *q, int rk);
+        void update_suffix_min(Tree *t);
+        void insert_tree(SoftHeap *q, Tree *t1, Tree *t2);
+        void remove_tree(SoftHeap *q, Tree *t);
+        bool leaf(Node *x);
+        void concatenate(Node *n1, Node *n2);
+        //void concatenateRec(ListCell *l1, ListCell *l2);
+        E pick_elem(Node* x);
+        void swapLR(Node *x);
+        void thisSwap(SoftHeap *Q);
 };
 
 
@@ -74,8 +75,8 @@ private:
 //FIXME NEW E
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E e) {
-  this->elem = e;
-  this->next = nullptr;
+    this->elem = e;
+    this->next = nullptr;
 }
 
 template<typename E>
@@ -91,21 +92,21 @@ SoftHeap<E>::Node::Node(SoftHeap<E>::Node *l, SoftHeap<E>::Node *r) {
 //FIXME NEW E
 template<typename E>
 SoftHeap<E>::Node::Node(E e) {
-  this->list = new ListCell(e);
-  this->rank = 0;
-  this->size = 1;
-  this->ckey = e;
-  this->left = nullptr;
-  this->right = nullptr;
+    this->list = new ListCell(e);
+    this->rank = 0;
+    this->size = 1;
+    this->ckey = e;
+    this->left = nullptr;
+    this->right = nullptr;
 }
 
 template<typename E>
 SoftHeap<E>::Tree::Tree(E e) {
-  this->root = new Node(e);
-  this->rank = 0;
-  this->prev = nullptr;
-  this->next = nullptr;
-  this->sufmin = this;
+    this->root = new Node(e);
+    this->rank = 0;
+    this->prev = nullptr;
+    this->next = nullptr;
+    this->sufmin = this;
 }
 
 template<typename E>
