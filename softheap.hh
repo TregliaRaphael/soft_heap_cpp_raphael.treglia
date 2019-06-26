@@ -21,7 +21,7 @@ struct SoftHeap {
     };
 
     struct Node {
-        int rank{}, size{};
+        int rank, size;
         E ckey;
         Node *left, *right;
         ListCell *list;
