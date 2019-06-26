@@ -166,9 +166,6 @@ SoftHeap<E>::Tree::~Tree(){
         delete this->next;
         this->next = nullptr;
     }
-    /*if (this->sufmin != nullptr)
-     * SUFMIN WAS AMONG NEXT AND PREV => Don't need to delete it then
-        delAndSetNullptr(this->sufmin);*/
 }
 
 /*SWAP DEC*/

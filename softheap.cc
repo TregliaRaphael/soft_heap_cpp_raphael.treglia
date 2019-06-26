@@ -4,7 +4,8 @@
 
 template<typename E>
 void SoftHeap<E>::insert(E e) {
-    meld(new SoftHeap<E>(e));
+    auto tmp = new SoftHeap<E>(e);
+    meld(tmp);
 }
 
 
@@ -21,7 +22,7 @@ void SoftHeap<E>::thisSwap(SoftHeap *Q){
     Tree *tQ = Q->first;
     int maxQ = Q->max_node_rank;
     int rkQ = Q->rank;
-    int epsQ = Q->epsilon;
+    double epsQ = Q->epsilon;
 
     Q->first = this->first;
     Q->max_node_rank = this->max_node_rank;
@@ -51,6 +52,7 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     this->first = Q->first;
 
     delete cpy;
+    cpy = nullptr;
 }
 
 
@@ -97,7 +99,7 @@ int SoftHeap<E>::ListCell::size() {
     if (list == nullptr)
         return 0;
     int cpt = 1;
-    while (list->next) {
+    while (list->next != nullptr) {
         list = list->next;
         cpt++;
     }
@@ -180,11 +182,14 @@ void SoftHeap<E>::merge_into(SoftHeap *q) {
 template<typename E>
 void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
     t1->next = t2;
-    if (t2->prev == nullptr)
+    if (t2->prev == nullptr) {
         q->first = t1;
+        this->first = nullptr;
+    }
     else
         t2->prev->next = t1;
     t2->prev = t1;
+
 }
 
 
@@ -266,7 +271,7 @@ bool SoftHeap<E>::deleteE(E e) {
 int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
     s->insert(3);
-    s->insert(3);
+    s->insert(4);
     s->insert(6);
     std::cout << "CREATE SOFT HEAP WORKS" << std::endl;
     delete s;
