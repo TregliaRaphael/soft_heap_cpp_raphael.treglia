@@ -1,7 +1,32 @@
 #include "softheap.hh"
 #include <iostream>
 
+/*
+template<typename E>
+double SoftHeap<E>::get_epsilon()
+{
+  return this.epsilon;
+}
 
+template<typename E>
+
+SoftHeap<E>::Tree *SoftHeap::get_Tree()
+{
+  return *this.first;
+}
+
+template<typename E>
+int  SoftHeap::get_max_node_rank()
+{
+  return this->max_node_rank;
+}
+
+template<typename E>
+int  SoftHeap::get_rank ()
+{
+  return this.rank;
+}
+*/
 template<typename E>
 void SoftHeap<E>::insert(E e) {
     meld(new SoftHeap<E>(e));
@@ -268,7 +293,7 @@ bool SoftHeap<E>::deleteE(E e) {
     return false;
 }
 
-
+/*
 int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
     s->insert(3);
@@ -276,4 +301,4 @@ int main() {
     s->insert(6);
     std::cout << "CREATE SOFT HEAP WORKS" << std::endl;
     delete s;
-}
+    }*/
