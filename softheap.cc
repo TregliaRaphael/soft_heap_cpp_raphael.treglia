@@ -9,10 +9,10 @@ void SoftHeap<E>::insert(E e) {
 
 
 template<typename E>
-void swap(E *a, E *b) {
-    E cpy = *a;
-    *a = *b;
-    *b = cpy;
+void SoftHeap<E>::swapLR (Node *x){
+    Node *tmp = x->left;
+    x->left = x->right;
+    x->right = tmp;
 }
 
 
@@ -46,14 +46,8 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     repeated_combine(Q, this->rank);
 
     Tree *cpy = this->first;
-    this->epsilon = Q->epsilon;
-    this->rank = Q->rank;
-    this->max_node_rank = Q->max_node_rank;
-
-    this->first = Q->first;
-
+    thisSwap(Q);
     delete cpy;
-    cpy = nullptr;
 }
 
 

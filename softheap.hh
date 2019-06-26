@@ -167,15 +167,3 @@ SoftHeap<E>::Tree::~Tree(){
         this->next = nullptr;
     }
 }
-
-/*SWAP DEC*/
-
-template <typename E>
-void swap (E *a, E *b);
-
-template<typename E>
-void SoftHeap<E>::swapLR (Node *x){
-    Node *tmp = x->left;
-    x->left = x->right;
-    x->right = tmp;
-}
