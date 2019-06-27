@@ -55,7 +55,7 @@ class Test
             assert(s->extract_min() == 1);
             assert(s->extract_min() == 2);
             assert(s->extract_min() == 9);
-            s->extract_min();
+            assert(s->extract_min() == std::nullopt);
         }
 };
 
