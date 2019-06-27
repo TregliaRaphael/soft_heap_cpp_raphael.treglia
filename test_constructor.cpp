@@ -22,13 +22,13 @@ int main (void)
 	printf("\n");
 
 	printf("This the Tree\n");
-	SoftHeap<int>::Tree tr = SoftHeap<int>::Tree(50);
+	SoftHeap<int>::Tree *tr = new SoftHeap<int>::Tree(50);
 
-	printf("%p\n", (void *)tr.root);
-	printf("%p\n", (void *)tr.prev);
-	printf("%p\n", (void *)tr.next);
-	printf("%p\n", (void *)tr.sufmin);
-	printf("%d\n", tr.rank);
+	printf("%p\n", (void *)tr->root);
+	printf("%p\n", (void *)tr->prev);
+	printf("%p\n", (void *)tr->next);
+	printf("%p\n", (void *)tr->sufmin);
+	printf("%d\n", tr->rank);
 	printf("\n");
 
 
@@ -47,6 +47,7 @@ int main (void)
 
 	delete(fi);
 	delete(lo);
+	delete (tr);
 	delete(sh);
 	return 0;
 }

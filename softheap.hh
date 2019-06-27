@@ -59,7 +59,7 @@ struct SoftHeap {
     int rank;
 
 
-    private:
+  //    private:
     void sift(Node *x);
 
     Node *combine(Node *x, Node *y);
