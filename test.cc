@@ -1,5 +1,5 @@
 #include <cassert>
-#include "heap_fct.hh"
+#include "softheap.hh"
 
 class Test
 {
