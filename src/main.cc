@@ -32,6 +32,6 @@ int main() {
     std::cout << *s->extract_min() << std::endl;
     std::cout << *s->extract_min() << std::endl;
 
-    delete s;
     delete nw;
+    delete s;
 }

@@ -47,6 +47,7 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     repeated_combine(Q, this->rank);
 
     thisSwap(Q);
+    Q->first = nullptr;
 }
 
 
