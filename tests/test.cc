@@ -10,6 +10,8 @@ class Test
             s->insert(6);
             s->insert(4);
             assert(s->first->root->ckey == 4);
+
+            delete s;
         }
 
         static void unit_test_next_ckey()
@@ -18,6 +20,7 @@ class Test
             s->insert(6);
             s->insert(4);
             assert(s->first->next->root->ckey == 3);
+            delete s;
         }
 
         static void unit_test_child_ckeys()
@@ -36,6 +39,7 @@ class Test
             assert(s->first->next->root->right->ckey == 4);
             assert(s->first->next->root->left->ckey == 6);
             assert(s->first->next->root->right->right->ckey == 12);
+            delete s;
         }
 
         static void unit_test_suf_min()
@@ -45,6 +49,7 @@ class Test
             s->insert(2);
 
             assert(s->extract_min() == -10);
+            delete s;
         }
 
         static void unit_test_delete()
@@ -56,6 +61,23 @@ class Test
             assert(s->extract_min() == 2);
             assert(s->extract_min() == 9);
             assert(s->extract_min() == std::nullopt);
+            delete s;
+        }
+
+        static void unit_test_meld()
+        {
+            SoftHeap<int> *s = new SoftHeap(5);
+            s->insert(2);
+
+            SoftHeap<int> *p = new SoftHeap(3);
+            p->insert(8);
+            p->insert(1);
+
+            s->meld(p);
+
+            assert(s->extract_min() == 1);
+            delete p;
+            delete s;
         }
 };
 
