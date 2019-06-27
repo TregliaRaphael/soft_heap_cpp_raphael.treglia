@@ -7,7 +7,9 @@
 
 template<typename E>
 void SoftHeap<E>::insert(E e) {
-    meld(new SoftHeap<E>(e));
+    SoftHeap<E> *q = new SoftHeap<E>(e);
+    meld(q);
+    delete q;
 }
 
 
@@ -49,8 +51,6 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     repeated_combine(Q, this->rank);
 
     thisSwap(Q);
-    delete Q;
-
 }
 
 
@@ -62,12 +62,6 @@ E SoftHeap<E>::pick_elem(Tree *t) {
         delete t->root->list;
         t->root->list = nullptr;
         sift(t->root);
-        if (leaf(t->root)) {
-            //IF e become a allocated ptr var,
-            // we'll need to put child->ckey = nullptr; before delete
-            delete t->root;
-            t->root = nullptr;
-        }
     }
         /*First elt of the list size > 1*/
     else {
@@ -92,11 +86,17 @@ E SoftHeap<E>::extract_min() {
     if (listSize(x) <= x->size / 2) {
         if (!leaf(x)) {
             sift(x);
-            //update_suffix_min(t);
-        } else if (x->list == nullptr)
+            update_suffix_min(t);
+        } else if (x->list == nullptr){
+	    delete x;
             remove_tree(this, t);
-
-        update_suffix_min(t);
+	}
+	
+	if (t->prev != NULL)
+	    update_suffix_min(t->prev);
+	t->prev = nullptr;
+	t->root = nullptr;
+	delete t;
     }
     return e;
 }
@@ -238,16 +238,19 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
         if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
             t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
-            //FIXME STORE T->NEXT
-            //Tree *todelete = t->next;
+		
+   	    /*Want to delete just the tree object and not what is inside*/
+            Tree *todelete = t->next;
             remove_tree(q, t->next);
-            //todelete->prev = nullptr;
-            //delete todelete;
-            //FIXME DELETE T->NEXT
+            todelete->prev = nullptr;
+	    todelete->next = nullptr;
+	    todelete->root = nullptr;
+            delete todelete;
+
         } else if (t->rank > rk)
             break;
-        else
-            t = t->next;
+	else
+	    t = t->next;
     }
 
     if (t->rank > q->rank)

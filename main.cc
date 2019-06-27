@@ -8,9 +8,6 @@ int main() {
     s->insert(6);
     s->insert(7);
     s->insert(8);
-    /*s->insert(2);
-    s->insert(1);
-    s->insert(9);*/
 
     /*std::cout << "DELETE 6: " << s->deleteE(6) << std::endl;
     std::cout << "DELETE 3: " << s->deleteE(3) << std::endl;
@@ -36,4 +33,5 @@ int main() {
     std::cout << s->extract_min() << std::endl;
 
     delete s;
+    delete nw;
 }
