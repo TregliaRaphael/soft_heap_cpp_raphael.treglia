@@ -17,24 +17,24 @@
 template<typename E>
 struct SoftHeap {
     struct ListCell {
-        E elem;
+        E *elem;
         int del;
         ListCell *next;
 
-        ListCell(E e);
+        ListCell(E *e);
 
         ~ListCell();
     };
 
     struct Node {
         int rank, size, num;
-        E ckey;
+        E *ckey;
         Node *left, *right;
         ListCell *list;
 
         Node(Node *l, Node *r);
 
-        Node(E e);
+        Node(E *e);
 
         ~Node();
     };
@@ -44,24 +44,24 @@ struct SoftHeap {
         Tree *prev, *next, *sufmin;
         int rank;
 
-        Tree(E e);
+        Tree(E *e);
 
         ~Tree();
     };
 
-    SoftHeap(E e);
+    SoftHeap(E *e);
 
     ~SoftHeap();
 
-    void insert(E e);
+    void insert(E *e);
 
-    bool deleteE(E e);
+    bool deleteE(E *e);
 
-    bool fakeDelete(E e);
+    bool fakeDelete(E *e);
 
     void meld(SoftHeap *Q);
 
-    std::optional<E> extract_min();
+    std::optional<E*> extract_min();
 
     double epsilon;
     Tree *first;
@@ -74,9 +74,9 @@ struct SoftHeap {
 
     Node *combine(Node *x, Node *y);
 
-    bool searchAndDestroy(Node *parent, Node *child, E e);
+    bool searchAndDestroy(Node *parent, Node *child, E *e);
 
-    bool searchAndDestroyFake(Node *parent, Node *child, E e);
+    bool searchAndDestroyFake(Node *child, E *e);
 
     void kickEFromList(ListCell *prev, ListCell *actual, Node *parent, Node *child);
 
@@ -94,7 +94,7 @@ struct SoftHeap {
 
     void concatenate(Node *n1, Node *n2);
 
-    E pick_elem(Tree *t, int *deleted);
+    E *pick_elem(Tree *t, int *deleted);
 
     void swapLR(Node *x);
 
@@ -109,7 +109,7 @@ struct SoftHeap {
 
 //FIXME NEW E
 template<typename E>
-SoftHeap<E>::ListCell::ListCell(E e) {
+SoftHeap<E>::ListCell::ListCell(E *e) {
     this->elem = e;
     this->del = 1; //NOT_DELETED = 1
     this->next = nullptr;
@@ -128,7 +128,7 @@ SoftHeap<E>::Node::Node(SoftHeap<E>::Node *l, SoftHeap<E>::Node *r) {
 
 //FIXME NEW E
 template<typename E>
-SoftHeap<E>::Node::Node(E e) {
+SoftHeap<E>::Node::Node(E *e) {
     this->list = new ListCell(e);
     this->rank = 0;
     this->size = 1;
@@ -139,7 +139,7 @@ SoftHeap<E>::Node::Node(E e) {
 }
 
 template<typename E>
-SoftHeap<E>::Tree::Tree(E e) {
+SoftHeap<E>::Tree::Tree(E *e) {
     this->root = new Node(e);
     this->rank = 0;
     this->prev = nullptr;
@@ -148,7 +148,7 @@ SoftHeap<E>::Tree::Tree(E e) {
 }
 
 template<typename E>
-SoftHeap<E>::SoftHeap(E e) {
+SoftHeap<E>::SoftHeap(E *e) {
     this->epsilon = 0.1;
     this->rank = 0;
     this->max_node_rank = log2(1. / this->epsilon) + 5;

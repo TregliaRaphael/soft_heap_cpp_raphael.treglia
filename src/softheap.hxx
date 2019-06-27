@@ -2,7 +2,7 @@
 #include <cassert>
 
 template<typename E>
-void SoftHeap<E>::insert(E e) {
+void SoftHeap<E>::insert(E *e) {
     SoftHeap <E> *q = new SoftHeap<E>(e);
     meld(q);
     delete q;
@@ -52,9 +52,9 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
 
 
 template<typename E>
-E SoftHeap<E>::pick_elem(Tree *t, int *deleted) {
+E *SoftHeap<E>::pick_elem(Tree *t, int *deleted) {
     SoftHeap<E>::ListCell *actual = t->root->list;
-    E act_elem = actual->elem;
+    E *act_elem = actual->elem;
     *deleted = actual->del;
     if (actual->next == nullptr) {
         delete t->root->list;
@@ -71,15 +71,15 @@ E SoftHeap<E>::pick_elem(Tree *t, int *deleted) {
     return act_elem;
 }
 
-
+//FIXME CARE E*
 template<typename E>
-std::optional <E> SoftHeap<E>::extract_min() {
+std::optional <E*> SoftHeap<E>::extract_min() {
     int *deleted = new int(2);//DELETED = 2
-    E e;
+    E *e = nullptr;
     while (*deleted == DELETED) {
         if (this->first == nullptr) {
             delete deleted;
-            return std::nullopt;
+            return {};
         }
 
         Tree *t = this->first->sufmin;
@@ -104,7 +104,7 @@ std::optional <E> SoftHeap<E>::extract_min() {
         }
     }
     delete deleted;
-    return std::optional(e);
+    return e;
 }
 
 
@@ -148,7 +148,7 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
 template<typename E>
 void SoftHeap<E>::sift(Node *x) {
     while (listSize(x) < x->size && !leaf(x)) {
-        if (x->left == nullptr || (x->right != nullptr && x->left->ckey > x->right->ckey))
+        if (x->left == nullptr || (x->right != nullptr && *x->left->ckey > *x->right->ckey))
             swapLR(x);
 
         concatenate(x, x->left);
@@ -215,7 +215,7 @@ void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
 template<typename E>
 void SoftHeap<E>::update_suffix_min(Tree *t) {
     while (t != nullptr) {
-        if (t->next == nullptr || t->root->ckey <= t->next->sufmin->root->ckey)
+        if (t->next == nullptr || *t->root->ckey <= *t->next->sufmin->root->ckey)
             t->sufmin = t;
         else
             t->sufmin = t->next->sufmin;
@@ -277,7 +277,7 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
  * @return
  */
 template<typename E>
-bool SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E e) {
+bool SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e) {
     assert(listSize(child) != 0);
 
     ListCell *l = child->list;
@@ -285,7 +285,7 @@ bool SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E e) {
     bool lft, rgt;
 
     while (l != nullptr) {
-        if (l->elem == e) {
+        if (*l->elem == *e) {
             kickEFromList(prev, l, parent, child);
             return true;
         }
@@ -346,7 +346,7 @@ void SoftHeap<E>::kickEFromList(ListCell *prev, ListCell *actual, Node *parent, 
 
 
 template<typename E>
-bool SoftHeap<E>::deleteE(E e) {
+bool SoftHeap<E>::deleteE(E *e) {
     Tree *t = this->first;
     while (t != nullptr) {
         ListCell *l = t->root->list;
@@ -354,7 +354,7 @@ bool SoftHeap<E>::deleteE(E e) {
         assert(listSize(t->root) != 0);
         bool lft, rgt;
         while (l != nullptr) {
-            if (l->elem == e) {
+            if (*l->elem == *e) {
                 if (prev == nullptr && l->next == nullptr) {
                     delete t->root->list;
                     t->root->list = nullptr;
@@ -411,27 +411,27 @@ bool SoftHeap<E>::deleteE(E e) {
 
 
 template<typename E>
-bool SoftHeap<E>::fakeDelete(E e) {
+bool SoftHeap<E>::fakeDelete(E *e) {
     Tree *t = this->first;
     while (t != nullptr) {
         ListCell *l = t->root->list;
         assert(listSize(t->root) != 0);
         bool lft, rgt;
         while (l != nullptr) {
-            if (l->elem == e) {
+            if (*l->elem == *e) {
                 l->del = 2; //DELETED = 2
                 return true;
             }
             l = l->next;
         }
         if (t->root->left != nullptr) {
-            lft = searchAndDestroy(t->root, t->root->left, e);
+            lft = searchAndDestroyFake(t->root->left, e);
             if (lft)
                 return true;
         }
 
         if (t->root->right != nullptr) {
-            rgt = searchAndDestroy(t->root, t->root->right, e);
+            rgt = searchAndDestroyFake(t->root->right, e);
             if (rgt)
                 return true;
         }
@@ -442,30 +442,28 @@ bool SoftHeap<E>::fakeDelete(E e) {
 }
 
 template<typename E>
-bool SoftHeap<E>::searchAndDestroyFake(Node *parent, Node *child, E e) {
+bool SoftHeap<E>::searchAndDestroyFake(Node *child, E *e) {
     assert(listSize(child) != 0);
 
     ListCell *l = child->list;
-    ListCell *prev = nullptr;
     bool lft, rgt;
 
     while (l != nullptr) {
-        if (l->elem == e) {
+        if (*l->elem == *e) {
             l->del = 2; //DELETED = 2
             return true;
         }
-        prev = l;
         l = l->next;
     }
 
     if (child->left != nullptr) {
-        lft = searchAndDestroy(child, child->left, e);
+        lft = searchAndDestroyFake(child->left, e);
         if (lft)
             return true;
     }
 
     if (child->right != nullptr) {
-        rgt = searchAndDestroy(child, child->right, e);
+        rgt = searchAndDestroyFake(child->right, e);
         if (rgt)
             return true;
     }
