@@ -9,10 +9,10 @@ int main() {
     s->insert(7);
     s->insert(8);
 
-    /*std::cout << "DELETE 6: " << s->deleteE(6) << std::endl;
-    std::cout << "DELETE 3: " << s->deleteE(3) << std::endl;
-    std::cout << "DELETE 4: " << s->deleteE(4) << std::endl;
-    std::cout << "DELETE 5: " << s->deleteE(5) << std::endl;*/
+    std::cout << "DELETE 6: " << s->fakeDelete(6) << std::endl;
+    std::cout << "DELETE 3: " << s->fakeDelete(3) << std::endl;
+    std::cout << "DELETE 4: " << s->fakeDelete(4) << std::endl;
+    std::cout << "DELETE 5: " << s->fakeDelete(5) << std::endl;
 
 
 
@@ -22,15 +22,15 @@ int main() {
 
     s->meld(nw);
 
-   /* std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;*/
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
+    std::cout << *s->extract_min() << std::endl;
 
     delete s;
     delete nw;

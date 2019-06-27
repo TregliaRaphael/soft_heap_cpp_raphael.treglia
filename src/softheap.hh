@@ -8,10 +8,17 @@
 #include <cmath>
 #include <typeinfo>
 
+
+#define NOT_IN_HEAP 0
+#define NOT_DELETED 1
+#define DELETED 2
+
+
 template<typename E>
 struct SoftHeap {
     struct ListCell {
         E elem;
+        int del;
         ListCell *next;
 
         ListCell(E e);
@@ -50,6 +57,8 @@ struct SoftHeap {
 
     bool deleteE(E e);
 
+    bool fakeDelete(E e);
+
     void meld(SoftHeap *Q);
 
     std::optional<E> extract_min();
@@ -67,6 +76,8 @@ struct SoftHeap {
 
     bool searchAndDestroy(Node *parent, Node *child, E e);
 
+    bool searchAndDestroyFake(Node *parent, Node *child, E e);
+
     void kickEFromList(ListCell *prev, ListCell *actual, Node *parent, Node *child);
 
     void merge_into(SoftHeap *q);
@@ -83,7 +94,7 @@ struct SoftHeap {
 
     void concatenate(Node *n1, Node *n2);
 
-    E pick_elem(Tree *t);
+    E pick_elem(Tree *t, int *deleted);
 
     void swapLR(Node *x);
 
@@ -100,6 +111,7 @@ struct SoftHeap {
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E e) {
     this->elem = e;
+    this->del = 1; //NOT_DELETED = 1
     this->next = nullptr;
 }
 
