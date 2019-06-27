@@ -23,3 +23,4 @@ run:
 clean:
 	rm -rf $(EXEC)
 	rm -rf test
+	$(RM) test_soft
