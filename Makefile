@@ -14,6 +14,9 @@ soft_heap: $(FILE)
 test:
 	$(CXX) -o test $(TEST) $(CXXFLAGS)
 
+test_soft:
+	$(CXX) $(CXXFLAGS) test.cc -o test_f 
+
 run:
 	./$(EXEC)
 
