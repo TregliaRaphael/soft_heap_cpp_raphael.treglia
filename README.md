@@ -1,6 +1,5 @@
-### SOFT HEAP Project C++ project replacement
+#SOFT HEAP Project C++ project
 
-## Soft Heap variante from kaplan choosen => the one with the BTree
+## Soft Heap variante from kaplan choosen => BTree implem
 
-somes definitely lost bytes idk why
-need to fix infinite loop
+need to fix delete only now
