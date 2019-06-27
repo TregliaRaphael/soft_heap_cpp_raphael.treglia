@@ -1,8 +1,8 @@
 CXX=g++
 CXXFLAGS= -Wall -Wextra -Werror -W -pedantic -std=c++17 -g
 EXEC=soft_heap
-TEST= test_constructor.cpp
-FILE=main.cc
+TEST= tests/test_constructor.cpp
+FILE= src/main.cc
 
 .PHONY: run
 
@@ -15,7 +15,7 @@ test:
 	$(CXX) -o test $(TEST) $(CXXFLAGS)
 
 test_soft:
-	$(CXX) $(CXXFLAGS) test.cc -o $(@)
+	$(CXX) $(CXXFLAGS) tests/test.cc -o $(@)
 
 run:
 	./$(EXEC)
