@@ -227,7 +227,6 @@ void SoftHeap<E>::remove_tree(SoftHeap *q, Tree *t) {
         t->prev->next = t->next;
     if (t->next != nullptr)
         t->next->prev = t->prev;
-    delete t;
 }
 
 
