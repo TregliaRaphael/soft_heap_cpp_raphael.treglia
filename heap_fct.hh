@@ -95,6 +95,7 @@ E SoftHeap<E>::extract_min() {
         if (t->prev != NULL)
             update_suffix_min(t->prev);
         t->prev = nullptr;
+        t->next = nullptr;
         t->root = nullptr;
         delete t;
     }
