@@ -3,7 +3,6 @@
 //#include "softheap.hh"
 #include <iostream>
 #include <cassert>
-#include <optional>
 
 template<typename E>
 void SoftHeap<E>::insert(E e) {
