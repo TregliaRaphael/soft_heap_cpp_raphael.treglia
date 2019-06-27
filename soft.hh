@@ -1,14 +1,13 @@
-//#pragma once
-
-//#include "softheap.hh"
+#include "softheap.hh"
 #include <iostream>
 #include <cassert>
+#include <optional>
 
 template<typename E>
 void SoftHeap<E>::insert(E e) {
-    SoftHeap<E> *q = new SoftHeap<E>(e);
-    meld(q);
-    delete q;
+  SoftHeap<int> *s = new SoftHeap<E>(e);
+  meld(s);
+  delete s;
 }
 
 
@@ -49,7 +48,9 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     //The tricky one seems to be repeated_combine
     repeated_combine(Q, this->rank);
 
-    thisSwap(Q);
+    this->thisSwap(Q);
+    //  delete Q;
+
 }
 
 
@@ -61,6 +62,12 @@ E SoftHeap<E>::pick_elem(Tree *t) {
         delete t->root->list;
         t->root->list = nullptr;
         sift(t->root);
+        if (leaf(t->root)) {
+            //IF e become a allocated ptr var,
+            // we'll need to put child->ckey = nullptr; before delete
+            delete t->root;
+            t->root = nullptr;
+        }
     }
         /*First elt of the list size > 1*/
     else {
@@ -74,9 +81,9 @@ E SoftHeap<E>::pick_elem(Tree *t) {
 
 
 template<typename E>
-std::optional<E> SoftHeap<E>::extract_min() {
+E SoftHeap<E>::extract_min() {
     if (this->first == nullptr)
-        return std::nullopt;//FIXME PUT OPTIONAL
+        return 0;//FIXME PUT OPTIONAL
 
     Tree *t = this->first->sufmin;
     Node *x = t->root;
@@ -85,20 +92,13 @@ std::optional<E> SoftHeap<E>::extract_min() {
     if (listSize(x) <= x->size / 2) {
         if (!leaf(x)) {
             sift(x);
-            update_suffix_min(t);
-        } else if (x->list == nullptr) {
-            delete x;
+            //update_suffix_min(t);
+        } else if (x->list == nullptr)
             remove_tree(this, t);
-        }
 
-        if (t->prev != NULL)
-            update_suffix_min(t->prev);
-        t->prev = nullptr;
-        t->next = nullptr;
-        t->root = nullptr;
-        delete t;
+        update_suffix_min(t);
     }
-    return std::optional(e);
+    return e;
 }
 
 
@@ -124,7 +124,8 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
         n1->list = n2->list;
         n1->num = n2->num;
         n2->num = 0;
-    } else if (n2->list == nullptr)
+    }
+    else if (n2->list == nullptr)
         return;
     else {
         ListCell *l = n1->list;
@@ -226,6 +227,7 @@ void SoftHeap<E>::remove_tree(SoftHeap *q, Tree *t) {
         t->prev->next = t->next;
     if (t->next != nullptr)
         t->next->prev = t->prev;
+    //    delete t;
 }
 
 
@@ -233,27 +235,29 @@ template<typename E>
 void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
     Tree *t = q->first;
     while (t->next != nullptr) {
-        if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
-            t->root = combine(t->root, t->next->root);
+      if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
+	    t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
-
-            /*Want to delete just the tree object and not what is inside*/
-            Tree *todelete = t->next;
+            //FIXME STORE T->NEXT
+	    Tree *todelete = t->next;
             remove_tree(q, t->next);
-            todelete->prev = nullptr;
-            todelete->next = nullptr;
-            todelete->root = nullptr;
-            delete todelete;
-
-        } else if (t->rank > rk)
+	    todelete->prev = nullptr;
+	    todelete->next = nullptr;
+       	    todelete->root = nullptr;
+	    delete todelete;
+            //FIXME DELETE T->NEXT
+        }
+	else if (t->rank > rk)
             break;
         else
-            t = t->next;
+            t= t->next;
     }
 
-    if (t->rank > q->rank)
-        q->rank = t->rank;
-    update_suffix_min(t);
+     if (t->rank > q->rank)
+       q->rank = t->rank;
+     update_suffix_min(t);
+    
+    
 }
 
 /**
@@ -395,3 +399,13 @@ bool SoftHeap<E>::deleteE(E e) {
 }
 
 
+/*int main() {
+    SoftHeap<int> *s = new SoftHeap<int>(5);
+    s->insert(3);
+    s->insert(4);
+    s->insert(6);
+    s->insert(7);
+    s->insert(8);
+    delete s;
+ 
+}*/
