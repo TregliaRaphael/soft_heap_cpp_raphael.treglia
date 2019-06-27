@@ -5,7 +5,9 @@
 
 template<typename E>
 void SoftHeap<E>::insert(E e) {
-    meld(new SoftHeap<E>(e));
+  SoftHeap<int> *s = new SoftHeap<E>(e);
+  meld(s);
+  delete s;
 }
 
 
@@ -46,8 +48,8 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
     //The tricky one seems to be repeated_combine
     repeated_combine(Q, this->rank);
 
-    thisSwap(Q);
-    delete Q;
+    this->thisSwap(Q);
+    //  delete Q;
 
 }
 
@@ -225,7 +227,7 @@ void SoftHeap<E>::remove_tree(SoftHeap *q, Tree *t) {
         t->prev->next = t->next;
     if (t->next != nullptr)
         t->next->prev = t->prev;
-    delete t;
+    //    delete t;
 }
 
 
@@ -233,24 +235,28 @@ template<typename E>
 void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
     Tree *t = q->first;
     while (t->next != nullptr) {
-        if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
-            t->root = combine(t->root, t->next->root);
+      if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
+	    t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
             //FIXME STORE T->NEXT
-            //Tree *todelete = t->next;
+	    Tree *todelete = t->next;
             remove_tree(q, t->next);
-            //todelete->prev = nullptr;
-            //delete todelete;
+	    todelete->prev = nullptr;
+       	    todelete->root = nullptr;
+	    delete todelete;
             //FIXME DELETE T->NEXT
-        } else if (t->rank > rk)
+        }
+	else if (t->rank > rk)
             break;
         else
-            t = t->next;
+            t= t->next;
     }
 
-    if (t->rank > q->rank)
-        q->rank = t->rank;
-    update_suffix_min(t);
+     if (t->rank > q->rank)
+       q->rank = t->rank;
+     update_suffix_min(t);
+    
+    
 }
 
 /**
@@ -393,11 +399,8 @@ bool SoftHeap<E>::deleteE(E e) {
 
 
 int main() {
-  //SoftHeap<int> *s = new SoftHeap<int>(5);
-    SoftHeap<int> *d = new SoftHeap<int>(45);
-    d->remove_tree(d,d->first);
-    // s->remove_tree(s,s->first);
-
-    // delete s;
-    delete d;
+    SoftHeap<int> *s = new SoftHeap<int>(5);
+    s->insert(3);
+    delete s;
+ 
 }
