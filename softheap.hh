@@ -195,3 +195,5 @@ SoftHeap<E>::Tree::~Tree() {
         this->next = nullptr;
     }
 }
+
+#include "softheap.hxx"

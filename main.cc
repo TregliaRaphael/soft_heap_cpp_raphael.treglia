@@ -1,5 +1,5 @@
 #include <iostream>
-#include "heap_fct.hh"
+#include "softheap.hh"
 
 int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
