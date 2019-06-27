@@ -16,4 +16,4 @@ While we are getting an element with the deleted tag, we extract again until get
 ## DeleteE(E e) => real delete that doesn't work for now => need just to handle a weird case
 => a tree with two nodes deletes all the nodes otherwise it works
 
-
+#Need to do tests with always the sames values but not in the same order and not all time one by one
