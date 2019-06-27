@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS= -Wall -Wextra -Werror -W -pedantic -std=c++17 -g
 EXEC=soft_heap
-TEST= tests/test_constructor.cpp
+TEST= tests/test_constructor.cpp tests/main.cpp
 FILE= src/main.cc
 
 .PHONY: run
