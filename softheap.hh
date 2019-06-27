@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include <optional>
 #include <iostream>
 #include <cmath>
 #include <typeinfo>
@@ -51,7 +52,7 @@ struct SoftHeap {
 
     void meld(SoftHeap *Q);
 
-    E extract_min();
+    std::optional<E> extract_min();
 
     double epsilon;
     Tree *first;
