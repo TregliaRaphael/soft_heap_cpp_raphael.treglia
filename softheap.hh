@@ -13,8 +13,6 @@ struct SoftHeap {
         E elem;
         ListCell *next;
 
-        int size();
-
         ListCell(E e);
 
         ~ListCell();
@@ -49,7 +47,7 @@ struct SoftHeap {
 
     void insert(E e);
 
-    E deleteE(E e);
+    bool deleteE(E e);
 
     void meld(SoftHeap *Q);
 
@@ -66,7 +64,9 @@ struct SoftHeap {
 
     Node *combine(Node *x, Node *y);
 
-    E searchAndDestroy(Node *parent, Node *child, E e);
+    bool searchAndDestroy(Node *parent, Node *child, E e);
+
+    void kickEFromList(ListCell *prev, ListCell *actual, Node *parent, Node *child);
 
     void merge_into(SoftHeap *q);
 
@@ -82,11 +82,13 @@ struct SoftHeap {
 
     void concatenate(Node *n1, Node *n2);
 
-    E pick_elem(Node *x);
+    E pick_elem(Tree *t);
 
     void swapLR(Node *x);
 
     void thisSwap(SoftHeap *Q);
+
+    int listSize(Node *x);
 
 };
 
