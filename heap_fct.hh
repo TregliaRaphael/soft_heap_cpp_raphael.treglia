@@ -87,16 +87,16 @@ E SoftHeap<E>::extract_min() {
         if (!leaf(x)) {
             sift(x);
             update_suffix_min(t);
-        } else if (x->list == nullptr){
-	    delete x;
+        } else if (x->list == nullptr) {
+            delete x;
             remove_tree(this, t);
-	}
-	
-	if (t->prev != NULL)
-	    update_suffix_min(t->prev);
-	t->prev = nullptr;
-	t->root = nullptr;
-	delete t;
+        }
+
+        if (t->prev != NULL)
+            update_suffix_min(t->prev);
+        t->prev = nullptr;
+        t->root = nullptr;
+        delete t;
     }
     return e;
 }
@@ -124,8 +124,7 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
         n1->list = n2->list;
         n1->num = n2->num;
         n2->num = 0;
-    }
-    else if (n2->list == nullptr)
+    } else if (n2->list == nullptr)
         return;
     else {
         ListCell *l = n1->list;
@@ -237,19 +236,19 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
         if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
             t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
-		
-   	    /*Want to delete just the tree object and not what is inside*/
+
+            /*Want to delete just the tree object and not what is inside*/
             Tree *todelete = t->next;
             remove_tree(q, t->next);
             todelete->prev = nullptr;
-	    todelete->next = nullptr;
-	    todelete->root = nullptr;
+            todelete->next = nullptr;
+            todelete->root = nullptr;
             delete todelete;
 
         } else if (t->rank > rk)
             break;
-	else
-	    t = t->next;
+        else
+            t = t->next;
     }
 
     if (t->rank > q->rank)

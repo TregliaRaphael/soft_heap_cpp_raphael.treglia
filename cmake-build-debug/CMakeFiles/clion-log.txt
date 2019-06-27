@@ -1,4 +1,0 @@
-/usr/idea-log/clion-2019.1.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/raph/Desktop/soft_heap_cpp_raphael.treglia
--- Configuring done
--- Generating done
--- Build files have been written to: /home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug
