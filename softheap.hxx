@@ -75,9 +75,9 @@ E SoftHeap<E>::pick_elem(Tree *t) {
 
 
 template<typename E>
-E SoftHeap<E>::extract_min() {
+std::optional<E> SoftHeap<E>::extract_min() {
     if (this->first == nullptr)
-        return 0;//FIXME PUT OPTIONAL
+        return std::nullopt;//FIXME PUT OPTIONAL
 
     Tree *t = this->first->sufmin;
     Node *x = t->root;
@@ -99,7 +99,7 @@ E SoftHeap<E>::extract_min() {
         t->root = nullptr;
         delete t;
     }
-    return e;
+    return std::optional(e);
 }
 
 
