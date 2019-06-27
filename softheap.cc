@@ -242,6 +242,7 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
 	    Tree *todelete = t->next;
             remove_tree(q, t->next);
 	    todelete->prev = nullptr;
+	    todelete->next = nullptr;
        	    todelete->root = nullptr;
 	    delete todelete;
             //FIXME DELETE T->NEXT
@@ -401,6 +402,10 @@ bool SoftHeap<E>::deleteE(E e) {
 int main() {
     SoftHeap<int> *s = new SoftHeap<int>(5);
     s->insert(3);
+    s->insert(4);
+    s->insert(6);
+    s->insert(7);
+    s->insert(8);
     delete s;
  
 }
