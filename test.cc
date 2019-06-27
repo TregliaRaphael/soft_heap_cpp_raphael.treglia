@@ -54,6 +54,7 @@ class Test
             s->insert(1);
             assert(s->extract_min() == 1);
             assert(s->extract_min() == 2);
+            assert(s->extract_min() == 9);
         }
 };
 
