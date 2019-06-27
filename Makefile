@@ -15,7 +15,7 @@ test:
 	$(CXX) -o test $(TEST) $(CXXFLAGS)
 
 test_soft:
-	$(CXX) $(CXXFLAGS) test.cc -o test_f 
+	$(CXX) $(CXXFLAGS) test.cc -o $(@)
 
 run:
 	./$(EXEC)
