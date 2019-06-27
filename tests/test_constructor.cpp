@@ -1,7 +1,19 @@
 #include <cstring>
-#include "softheap.hh"
+#include "../src/softheap.hh"
 
-int main (void)
+
+
+void test_constructor_listcell()
+{
+  printf("This the ListCell\n");
+  SoftHeap<int>::ListCell *fi = new SoftHeap<int>::ListCell(968);
+  printf("%d\n", fi->elem);
+  printf("%p\n", (void *)fi->next);
+}
+
+
+
+/*int  (void)
 {
 	printf("This the ListCell\n");
 	SoftHeap<int>::ListCell *fi = new SoftHeap<int>::ListCell(968);
@@ -51,3 +63,4 @@ int main (void)
 	delete(sh);
 	return 0;
 }
+*/
