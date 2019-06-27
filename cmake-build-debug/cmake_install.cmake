@@ -1,4 +1,4 @@
-# Install script for directory: /home/raph/Desktop/soft_heap_cpp_raphael.treglia
+# Install script for directory: /home/raph/Desktop/shared_ptr
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/raph/Desktop/shared_ptr/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,59 +1,31 @@
 #include "softheap.hh"
 #include <iostream>
 
-/*
-template<typename E>
-double SoftHeap<E>::get_epsilon()
-{
-  return this.epsilon;
-}
 
-template<typename E>
-
-SoftHeap<E>::Tree *SoftHeap::get_Tree()
-{
-  return *this.first;
-}
-
-template<typename E>
-int  SoftHeap::get_max_node_rank()
-{
-  return this->max_node_rank;
-}
-
-template<typename E>
-int  SoftHeap::get_rank ()
-{
-  return this.rank;
-}
-*/
 template<typename E>
 void SoftHeap<E>::insert(E e) {
-    meld(new SoftHeap<E>(e));
+    meld(std::make_shared<SoftHeap<E>>(e));
 }
 
 
 template<typename E>
-void SoftHeap<E>::swapLR(Node *x) {
-    Node *tmp = x->left;
-    x->left = x->right;
-    x->right = tmp;
+void SoftHeap<E>::swapLR(std::shared_ptr<Node> x) {
+    x->left.swap(x->right);
 }
 
 
 template<typename E>
-void SoftHeap<E>::thisSwap(SoftHeap *Q) {
-    Tree *tQ = Q->first;
+void SoftHeap<E>::thisSwap(std::shared_ptr<SoftHeap> Q) {
+    this->first.swap(Q->first);
+
     int maxQ = Q->max_node_rank;
     int rkQ = Q->rank;
     double epsQ = Q->epsilon;
 
-    Q->first = this->first;
     Q->max_node_rank = this->max_node_rank;
     Q->rank = this->rank;
     Q->epsilon = this->epsilon;
 
-    this->first = tQ;
     this->max_node_rank = maxQ;
     this->rank = rkQ;
     this->epsilon = epsQ;
@@ -61,7 +33,7 @@ void SoftHeap<E>::thisSwap(SoftHeap *Q) {
 
 
 template<typename E>
-void SoftHeap<E>::meld(SoftHeap *Q) {
+void SoftHeap<E>::meld(std::shared_ptr<SoftHeap> Q) {
     if (this->rank > Q->rank)
         thisSwap(Q);
 
@@ -72,25 +44,22 @@ void SoftHeap<E>::meld(SoftHeap *Q) {
 
     //    Tree *cpy = this->first;
     thisSwap(Q);
-    //    delete cpy;
-    delete Q;
     
 }
 
 
 //FIXME
 template<typename E>
-E SoftHeap<E>::pick_elem(Node *x) {
-    SoftHeap<E>::ListCell *cpy = x->list;
-    SoftHeap<E>::ListCell *last = x->list;
+E SoftHeap<E>::pick_elem(std::shared_ptr<Node> x) {
+    std::shared_ptr<ListCell> cpy = x->list;
+    std::shared_ptr<ListCell> last = x->list;
 
     while (cpy != nullptr) {
-        last = cpy;
-        cpy = cpy->next;
+        last.reset(cpy);
+        cpy.reset(cpy->next);
     }
 
     E cpy_elem = last->elem;
-    delete last;
     return cpy_elem;
 }
 
@@ -100,26 +69,26 @@ E SoftHeap<E>::extract_min() {
     if (this->first == nullptr)
         return NULL;
 
-    auto Tree = this->first->sufmin;
-    Node *x = Tree->root;
+    std::shared_ptr<Tree> t = this->first->sufmin;
+    std::shared_ptr<Node> *x = t->root;
     E e = pick_elem(x);
 
-    if (x->list.size() <= x->size / 2) {
-        if (leaf(x) == nullptr) {
+    if (listSize(x->list) <= x->size / 2) {
+        if (!leaf(x)) {
             sift(x);
-            update_suffix_min(Tree);
+            update_suffix_min(t);
         } else if (x->list == nullptr)
-            remove_tree(this, Tree);
+            remove_tree(this, t);
     }
     return e;
 }
 
 
 template<typename E>
-int SoftHeap<E>::ListCell::size() {
-    SoftHeap<E>::ListCell *list = this;
-    if (list == nullptr)
+int SoftHeap<E>::listSize(std::shared_ptr<Node> x) {
+    if (x->list == nullptr)
         return 0;
+    std::shared_ptr<ListCell> list = x->list;
     int cpt = 1;
     while (list->next != nullptr) {
         list = list->next;
@@ -130,7 +99,7 @@ int SoftHeap<E>::ListCell::size() {
 
 
 template<typename E>
-void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
+void SoftHeap<E>::concatenate(std::shared_ptr<Node> n1, std::shared_ptr<Node> n2) {
     if (n1->list == nullptr and n2->list == nullptr)
         return;
     else if (n1->list == nullptr)
@@ -138,7 +107,7 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
     else if (n2->list == nullptr)
         return;
     else {
-        ListCell *l = n1->list;
+        std::shared_ptr<ListCell> l = n1->list;
         while (l->next != nullptr)
             l = l->next;
         l->next = n2->list;
@@ -147,8 +116,8 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
 
 
 template<typename E>
-void SoftHeap<E>::sift(Node *x) {
-    while (x->list->size() < x->size && !leaf(x)) {
+void SoftHeap<E>::sift(std::shared_ptr<Node> x) {
+    while (listSize(x) < x->size && !leaf(x)) {
         if (x->left == nullptr || (x->right != nullptr && x->left->ckey > x->right->ckey))
             swapLR(x);
 
@@ -162,7 +131,6 @@ void SoftHeap<E>::sift(Node *x) {
         x->left->list = nullptr;
 
         if (leaf(x->left)) {
-            delete x->left;
             x->left = nullptr;
         } else
             sift(x->left);
@@ -171,8 +139,8 @@ void SoftHeap<E>::sift(Node *x) {
 
 
 template<typename E>
-typename SoftHeap<E>::Node *SoftHeap<E>::combine(Node *x, Node *y) {
-    Node *z = new Node(x, y);
+typename std::shared_ptr<typename SoftHeap<E>::Node> SoftHeap<E>::combine(std::shared_ptr<Node> x, std::shared_ptr<Node> y) {
+    std::shared_ptr<Node> z = std::make_shared<Node>(x, y);
     if (x->rank <= this->max_node_rank)
         z->size = 1;
     else
@@ -183,23 +151,23 @@ typename SoftHeap<E>::Node *SoftHeap<E>::combine(Node *x, Node *y) {
 
 
 template<typename E>
-bool SoftHeap<E>::leaf(Node *x) {
+bool SoftHeap<E>::leaf(std::shared_ptr<Node> x) {
     return x->left == nullptr && x->right == nullptr;
 }
 
 
 template<typename E>
-void SoftHeap<E>::merge_into(SoftHeap *q) {
+void SoftHeap<E>::merge_into(std::shared_ptr<SoftHeap> q) {
     if (this->rank > q->rank)
         return;
 
-    Tree *t1 = this->first;
-    Tree *t2 = q->first;
+    std::shared_ptr<Tree> t1 = this->first;
+    std::shared_ptr<Tree> t2 = q->first;
 
     while (t1 != nullptr) {
         while (t1->rank > t2->rank)
             t2 = t2->next;
-        Tree *t1bis = t1->next;
+        std::shared_ptr<Tree> t1bis = t1->next;
         insert_tree(q, t1, t2);
         t1 = t1bis;
     }
@@ -207,7 +175,7 @@ void SoftHeap<E>::merge_into(SoftHeap *q) {
 
 
 template<typename E>
-void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
+void SoftHeap<E>::insert_tree(std::shared_ptr<SoftHeap> q, std::shared_ptr<Tree> t1, std::shared_ptr<Tree> t2) {
     t1->next = t2;
     if (t2->prev == nullptr) {
         q->first = t1;
@@ -220,7 +188,7 @@ void SoftHeap<E>::insert_tree(SoftHeap *q, Tree *t1, Tree *t2) {
 
 
 template<typename E>
-void SoftHeap<E>::update_suffix_min(Tree *t) {
+void SoftHeap<E>::update_suffix_min(std::shared_ptr<Tree> t) {
     while (t != nullptr) {
         if (t->next == nullptr || t->root->ckey <= t->next->sufmin->root->ckey)
             t->sufmin = t;
@@ -232,7 +200,7 @@ void SoftHeap<E>::update_suffix_min(Tree *t) {
 
 
 template<typename E>
-void SoftHeap<E>::remove_tree(SoftHeap *q, Tree *t) {
+void SoftHeap<E>::remove_tree(std::shared_ptr<SoftHeap> q, std::shared_ptr<Tree> t) {
     if (t->prev == nullptr)
         q->first = t->next;
     else
@@ -243,17 +211,13 @@ void SoftHeap<E>::remove_tree(SoftHeap *q, Tree *t) {
 
 
 template<typename E>
-void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
-    Tree *t = q->first;
+void SoftHeap<E>::repeated_combine(std::shared_ptr<SoftHeap> q, int rk) {
+    std::shared_ptr<Tree> t = q->first;
     while (t->next != nullptr) {
         if (t->next->rank == t->rank && (t->next->next == nullptr || t->rank != t->next->next->rank)) {
             t->root = combine(t->root, t->next->root);
             t->rank = t->root->rank;
-            //FIXME STORE T->NEXT
-	    Tree * todelete = t->next;
             remove_tree(q, t->next);
-	    delete todelete;
-            //FIXME DELETE T->NEXT
         } else if (t->rank > rk)
             break;
         else
@@ -267,8 +231,8 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
 
 
 template<typename E>
-E SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E e) {
-    ListCell *l = child->list;
+E SoftHeap<E>::searchAndDestroy(std::shared_ptr<Node> parent, std::shared_ptr<Node> child, E e) {
+    std::shared_ptr<ListCell> *l = child->list;
     E lft = NULL;
     E rgt = NULL;
     while (l != nullptr) {
@@ -300,7 +264,7 @@ E SoftHeap<E>::deleteE(E e) {
 
         /******/
 
-        ListCell *l = t->root->list;
+        std::shared_ptr<ListCell> l = t->root->list;
         E lft = NULL;
         E rgt = NULL;
         while (l != nullptr) {
@@ -329,32 +293,15 @@ E SoftHeap<E>::deleteE(E e) {
     return NULL;
 }
 
-int main()  {
-  
-  SoftHeap<int> *tr1 = new SoftHeap<int>(50);
-  SoftHeap<int> *tr2 = new SoftHeap<int>(14);
-  //  SoftHeap<int> * SoftHeap(4);
-  tr1->insert_tree(tr2,tr1->first,tr2->first);
-  delete tr1;
-  delete tr2;
-  //  delete sh;
-  }
-  
+int main() {
+    std::shared_ptr<SoftHeap<int>> s = std::make_shared<SoftHeap<int>>(5);
+    s->insert(3);
+    s->insert(4);
+    s->insert(6);
 
-/*int main() {
-    SoftHeap<int> *s = new SoftHeap<int>(5);
-     s->insert(3);
-     s->insert(4);
-   s->insert(6);
-
-        SoftHeap<int> *nw = new SoftHeap<int>(2);
+    std::shared_ptr<SoftHeap<int>> nw = std::make_shared<SoftHeap<int>>(2);
     nw->insert(2);
     nw->insert(3);
 
-
     s->meld(nw);
-
-    std::cout << "CREATE SOFT HEAP WORKS" << std::endl;*/
-//          delete s;
- //delete nw;
-//}
+}

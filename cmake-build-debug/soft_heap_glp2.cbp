@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
+				<Option working_dir="/home/raph/Desktop/shared_ptr/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
+				<Option working_dir="/home/raph/Desktop/shared_ptr/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="softheap.hh">
-				<Option output="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/libsoftheap.hh.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
+				<Option output="/home/raph/Desktop/shared_ptr/cmake-build-debug/libsoftheap.hh.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/raph/Desktop/shared_ptr/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -44,15 +44,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 softheap.hh"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 softheap.hh"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="softheap.hh/fast">
-				<Option output="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/libsoftheap.hh.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
+				<Option output="/home/raph/Desktop/shared_ptr/cmake-build-debug/libsoftheap.hh.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/raph/Desktop/shared_ptr/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -67,30 +67,30 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 softheap.hh/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 softheap.hh/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug"/>
+				<Option working_dir="/home/raph/Desktop/shared_ptr/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/soft_heap_cpp_raphael.treglia/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/raph/Desktop/shared_ptr/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.cc">
+		<Unit filename="/home/raph/Desktop/shared_ptr/softheap.cc">
 			<Option target="softheap.hh"/>
 		</Unit>
-		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/softheap.hh">
+		<Unit filename="/home/raph/Desktop/shared_ptr/softheap.hh">
 			<Option target="softheap.hh"/>
 		</Unit>
-		<Unit filename="/home/raph/Desktop/soft_heap_cpp_raphael.treglia/CMakeLists.txt">
+		<Unit filename="/home/raph/Desktop/shared_ptr/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
