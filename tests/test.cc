@@ -88,4 +88,5 @@ int main(void)
     Test::unit_test_child_ckeys();
     Test::unit_test_suf_min();
     Test::unit_test_delete();
+    Test::unit_test_meld();
 }
