@@ -19,7 +19,7 @@ struct SoftHeap {
     };
 
     struct Node {
-        int rank, size;
+        int rank, size, num;
         E ckey;
         Node *left, *right;
         ListCell *list;
@@ -107,6 +107,7 @@ SoftHeap<E>::Node::Node(SoftHeap<E>::Node *l, SoftHeap<E>::Node *r) {
     this->list = nullptr;
     this->rank = l->rank + 1;
     this->size = 0;
+    this->num = this->size;
     this->ckey = 0;
     this->left = l;
     this->right = r;
@@ -118,6 +119,7 @@ SoftHeap<E>::Node::Node(E e) {
     this->list = new ListCell(e);
     this->rank = 0;
     this->size = 1;
+    this->num = this->size;
     this->ckey = e;
     this->left = nullptr;
     this->right = nullptr;

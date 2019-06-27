@@ -81,7 +81,7 @@ E SoftHeap<E>::pick_elem(Tree *t) {
 template<typename E>
 E SoftHeap<E>::extract_min() {
     if (this->first == nullptr)
-        return 0;
+        return 0;//FIXME PUT OPTIONAL
 
     Tree *t = this->first->sufmin;
     Node *x = t->root;
@@ -90,9 +90,11 @@ E SoftHeap<E>::extract_min() {
     if (listSize(x) <= x->size / 2) {
         if (!leaf(x)) {
             sift(x);
-            update_suffix_min(t);
+            //update_suffix_min(t);
         } else if (x->list == nullptr)
             remove_tree(this, t);
+
+        update_suffix_min(t);
     }
     return e;
 }
@@ -116,8 +118,11 @@ template<typename E>
 void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
     if (n1->list == nullptr and n2->list == nullptr)
         return;
-    else if (n1->list == nullptr)
+    else if (n1->list == nullptr) {
         n1->list = n2->list;
+        n1->num = n2->num;
+        n2->num = 0;
+    }
     else if (n2->list == nullptr)
         return;
     else {
@@ -125,6 +130,8 @@ void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
         while (l->next != nullptr)
             l = l->next;
         l->next = n2->list;
+        n1->num += n2->num;
+        n2->num = 0;
     }
     n2->list = nullptr;
     //FIXME do smtg with nelemns when delete will works
@@ -257,7 +264,7 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
  */
 template<typename E>
 bool SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E e) {
-    assert(child->list->size() != 0);
+    assert(listSize(child) != 0);
 
     ListCell *l = child->list;
     ListCell *prev = nullptr;
@@ -292,6 +299,7 @@ void SoftHeap<E>::kickEFromList(ListCell *prev, ListCell *actual, Node *parent, 
     /*If only one element*/
     if (prev == nullptr && actual->next == nullptr) {
         delete child->list;
+        child->list = nullptr;
         sift(child);
         if (leaf(child)) {
             if (parent->left == child)
@@ -329,12 +337,13 @@ bool SoftHeap<E>::deleteE(E e) {
     while (t != nullptr) {
         ListCell *l = t->root->list;
         ListCell *prev = nullptr;
-        assert(l->size() != 0);
+        assert(listSize(t->root) != 0);
         bool lft, rgt;
         while (l != nullptr) {
             if (l->elem == e) {
                 if (prev == nullptr && l->next == nullptr) {
                     delete t->root->list;
+                    t->root->list = nullptr;
                     sift(t->root);
                     if (leaf(t->root)) {
                         //IF e become a allocated ptr var,
@@ -387,16 +396,34 @@ int main() {
     s->insert(3);
     s->insert(4);
     s->insert(6);
+    s->insert(7);
+    s->insert(8);
+    /*s->insert(2);
+    s->insert(1);
+    s->insert(9);*/
+
+    /*std::cout << "DELETE 6: " << s->deleteE(6) << std::endl;
+    std::cout << "DELETE 3: " << s->deleteE(3) << std::endl;
+    std::cout << "DELETE 4: " << s->deleteE(4) << std::endl;
+    std::cout << "DELETE 5: " << s->deleteE(5) << std::endl;*/
+
+
+
+    SoftHeap<int> *nw = new SoftHeap<int>(2);
+    nw->insert(1);
+    nw->insert(9);
+
+    s->meld(nw);
+
     std::cout << s->extract_min() << std::endl;
     std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;
 
-    //s->deleteE(6);
-
-    /*SoftHeap<int> *nw = new SoftHeap<int>(2);
-    nw->insert(2);
-    nw->insert(3);
-
-
-    s->meld(nw);*/
     delete s;
 }
