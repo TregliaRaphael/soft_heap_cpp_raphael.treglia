@@ -33,34 +33,38 @@ public:
     void operator!=(Str& other){
         return this.s != other.s;
     }
+
+    void operator=(Str& other){
+        return other;
+    }
 };
 
 
 
 int main() {
-    auto *ma = new Str("tata");
-    SoftHeap<Str> *s = new SoftHeap<Str>(ma);
-    s->insert("z");
-    s->insert("azeaeeza");
-    s->insert("xz");
-    s->insert("azezaeazeeze");
-    s->insert("zzz");
+    auto *tata = new Str("tata"), *z = new Str("z"), *azeaeeza = new Str("azeaeeza"), *xz = new Str("xz"),
+            *azezaeazeeze = new Str("azezaeazeeze"), *zzz = new Str("zzz");
 
-    auto *s1 = new Str("tata");
-    auto *s2 = new Str("zzz");
-    auto *s3 = new Str("xz");
-    auto *s4 = new Str("azeaeeza");
+    SoftHeap<Str> *s = new SoftHeap<Str>(tata);
 
-    std::cout << "DELETE 6: " << s->fakeDelete(s1) << std::endl;
-    std::cout << "DELETE 3: " << s->fakeDelete(s2) << std::endl;
-    std::cout << "DELETE 4: " << s->fakeDelete(s3) << std::endl;
-    std::cout << "DELETE 5: " << s->fakeDelete(s4) << std::endl;
+    s->insert(z);
+    s->insert(azeaeeza);
+    s->insert(xz);
+    s->insert(azezaeazeeze);
+    s->insert(zzz);
+
+    std::cout << "DELETE 6: " << s->fakeDelete(tata) << std::endl;
+    std::cout << "DELETE 3: " << s->fakeDelete(zzz) << std::endl;
+    std::cout << "DELETE 4: " << s->fakeDelete(xz) << std::endl;
+    std::cout << "DELETE 5: " << s->fakeDelete(azeaeeza) << std::endl;
 
 
+    auto *treze = new Str("treze"), braaaa = new Str("braaaa"), tkqiazezz = new Str("tkqiazezz");
+    SoftHeap<Str> *nw = new SoftHeap<Str>(treze);
 
-    SoftHeap<Str> *nw = new SoftHeap<int>(2);
-    nw->insert(1);
-    nw->insert(9);
+
+    nw->insert(braaaa);
+    nw->insert(tkqiazezz);
 
     s->meld(nw);
 
@@ -73,6 +77,8 @@ int main() {
     std::cout << *s->extract_min() << std::endl;
     std::cout << *s->extract_min() << std::endl;
     std::cout << *s->extract_min() << std::endl;
+
+    delete tata, z, azeaeeza, xz, azezaeazeeze, zzz, treze, braaaa, tkqiazezz;
 
     delete nw;
     delete s;
