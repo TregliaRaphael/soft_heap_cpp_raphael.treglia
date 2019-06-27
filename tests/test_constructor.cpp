@@ -106,4 +106,7 @@ void test_constructor_softheap()
       printf("\033[0m");
     }
   delete sh;
+  
 }
+
+
