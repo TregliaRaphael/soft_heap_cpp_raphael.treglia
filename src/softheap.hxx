@@ -414,7 +414,6 @@ bool SoftHeap<E>::fakeDelete(E e) {
     Tree *t = this->first;
     while (t != nullptr) {
         ListCell *l = t->root->list;
-        ListCell *prev = nullptr;
         assert(listSize(t->root) != 0);
         bool lft, rgt;
         while (l != nullptr) {
@@ -422,7 +421,6 @@ bool SoftHeap<E>::fakeDelete(E e) {
                 l->del = 2; //DELETED = 2
                 return true;
             }
-            prev = l;
             l = l->next;
         }
         if (t->root->left != nullptr) {
