@@ -1,22 +1,64 @@
 #include <iostream>
 #include "softheap.hh"
+#include <string>
+
+
+class Str {
+public:
+    std::string s;
+    Str(std::string _s){
+        this->s = _s;
+    }
+
+    void operator>(Str& other){
+        return this.s.size() > other.s.size();
+    }
+
+    void operator<(Str& other){
+        return this.s.size() < other.s.size();
+    }
+
+    void operator>=(Str& other){
+        return this.s.size() >= other.s.size();
+    }
+
+    void operator<=(Str& other){
+        return this.s.size() <= other.s.size();
+    }
+
+    void operator==(Str& other){
+        return this.s == other.s;
+    }
+
+    void operator!=(Str& other){
+        return this.s != other.s;
+    }
+};
+
+
 
 int main() {
-    SoftHeap<int> *s = new SoftHeap<int>(5);
-    s->insert(3);
-    s->insert(4);
-    s->insert(6);
-    s->insert(7);
-    s->insert(8);
+    auto *ma = new Str("tata");
+    SoftHeap<Str> *s = new SoftHeap<Str>(ma);
+    s->insert("z");
+    s->insert("azeaeeza");
+    s->insert("xz");
+    s->insert("azezaeazeeze");
+    s->insert("zzz");
 
-    std::cout << "DELETE 6: " << s->fakeDelete(6) << std::endl;
-    std::cout << "DELETE 3: " << s->fakeDelete(3) << std::endl;
-    std::cout << "DELETE 4: " << s->fakeDelete(4) << std::endl;
-    std::cout << "DELETE 5: " << s->fakeDelete(5) << std::endl;
+    auto *s1 = new Str("tata");
+    auto *s2 = new Str("zzz");
+    auto *s3 = new Str("xz");
+    auto *s4 = new Str("azeaeeza");
+
+    std::cout << "DELETE 6: " << s->fakeDelete(s1) << std::endl;
+    std::cout << "DELETE 3: " << s->fakeDelete(s2) << std::endl;
+    std::cout << "DELETE 4: " << s->fakeDelete(s3) << std::endl;
+    std::cout << "DELETE 5: " << s->fakeDelete(s4) << std::endl;
 
 
 
-    SoftHeap<int> *nw = new SoftHeap<int>(2);
+    SoftHeap<Str> *nw = new SoftHeap<int>(2);
     nw->insert(1);
     nw->insert(9);
 
