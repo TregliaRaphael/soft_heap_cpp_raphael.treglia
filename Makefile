@@ -22,3 +22,4 @@ run:
 
 clean:
 	rm -rf $(EXEC)
+	rm -rf test
