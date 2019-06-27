@@ -22,6 +22,7 @@ int main() {
 
     s->meld(nw);
 
+   /* std::cout << s->extract_min() << std::endl;
     std::cout << s->extract_min() << std::endl;
     std::cout << s->extract_min() << std::endl;
     std::cout << s->extract_min() << std::endl;
@@ -29,8 +30,7 @@ int main() {
     std::cout << s->extract_min() << std::endl;
     std::cout << s->extract_min() << std::endl;
     std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
-    std::cout << s->extract_min() << std::endl;
+    std::cout << s->extract_min() << std::endl;*/
 
     delete s;
     delete nw;
