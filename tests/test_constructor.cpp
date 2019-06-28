@@ -173,7 +173,7 @@ void test_constructor_node_with_children()
 void test_constructor_tree_with_children()
 {
   printf("\033[1;33m");
-  printf("TEST 7: Simple Tree constructor  with children\n");
+  printf("TEST 7: Tree constructor  with children\n");
   printf("\033[0m");
 
   int a = 10;
