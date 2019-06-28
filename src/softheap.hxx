@@ -115,6 +115,7 @@ std::optional<E *> SoftHeap<E>::extract_min() {
             }
         }
     }
+    delete deleted;
     return e;
 }
 

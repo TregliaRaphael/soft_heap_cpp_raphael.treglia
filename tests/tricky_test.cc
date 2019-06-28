@@ -234,12 +234,12 @@ void test_7_ultime_test(int number_of_elem){
 
 int main() {
     test_1_insert_then_delete_x2();
-//    test_2_using_other_class();
-//    test_3_puting_more_int_and_extract_all();
-    //test_4_already_deleted();
-    //test_5_fake_delete();
-    //test_6_merge_all_kind_of_delete();
-    //test_7_ultime_test(15);
+    test_2_using_other_class();
+    test_3_puting_more_int_and_extract_all();
+    test_4_already_deleted();
+    test_5_fake_delete();
+    test_6_merge_all_kind_of_delete();
+    test_7_ultime_test(100000);
 }
 
 

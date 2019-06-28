@@ -22,8 +22,9 @@ test_soft:
 	$(CXX) $(CXXFLAGS) tests/test.cc -o $(@)
 	./$(@)
 
-tricky_test: clean $(EXEC)
+tricky_test: clean
 	$(CXX) $(CXXFLAGS) tests/tricky_test.cc -o $(@)
+	valgrind ./tricky_test
 
 
 run:
