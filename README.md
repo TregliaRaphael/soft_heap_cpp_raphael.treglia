@@ -1,4 +1,4 @@
-####SOFT HEAP Project C++ project
+#### SOFT HEAP Project C++ project
 
 ### Soft Heap variante from kaplan choosen => BTree implem
 
@@ -13,7 +13,6 @@
 ## FakeDelete(E e) => lazy manner deleted, it just marks the element as deleted and on the next extract_min
 While we are getting an element with the deleted tag, we extract again until get a not tagged deleted element
 
-## DeleteE(E e) => real delete that doesn't work for now => need just to handle a weird case
-=> a tree with two nodes deletes all the nodes otherwise it works
+## RealDelete(E e) => Reald delete means that the element is deleted for real in the heap and the value in the list doesn't exists anymore
 
-#Need to do tests with always the sames values but not in the same order and not all time one by one
+# Need to do tests with always the sames values but not in the same order and not all time one by on
