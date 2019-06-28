@@ -174,6 +174,17 @@ class Test
             delete s;
         }
 
+        static void easy_suff_min()
+        { 
+            int a = 2, b = 9, c = 1, d = 6;
+            SoftHeap<int> *s = new SoftHeap(&b);
+            s->insert(&d);
+            s->insert(&a);
+            s->insert(&c);
+
+            assert(*s->first->sufmin->root->ckey == 1);
+        }
+
 
 
 
@@ -192,4 +203,5 @@ int main(void)
     Test::unit_test_insert_random_1();
     Test::unit_test_insert_random_2();
     Test::unit_test_insert_random_3();
+    Test::easy_suff_min();
 }
