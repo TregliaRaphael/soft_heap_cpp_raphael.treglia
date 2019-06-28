@@ -14,9 +14,17 @@ void launch_test_constructor()
   test_constructor_tree_with_children();
 }
 
+void launch_test_insert()
+{
+  printf("\033[1;36m");
+  printf("TESTS OF THE INSERT FUNCTIONS\n");
+  printf("\033[0m");
+}
+
 
 int main (void)
 {
   launch_test_constructor();
+  launch_test_insert();
   return 0;
 }
