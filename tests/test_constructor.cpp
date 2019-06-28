@@ -111,10 +111,38 @@ void test_constructor_softheap()
   delete sh;  
 }
 
+void test_constructor_listcell_with_several_cell()
+{
+  printf("\033[1;33m");
+  printf("TEST 5: Simple ListCell constructor with several cell\n");
+  printf("\033[0m");
+  int a = 968 ;
+  int b = 4;
+  SoftHeap<int>::ListCell *fi = new SoftHeap<int>::ListCell(&a);
+  SoftHeap<int>::ListCell *fo = new SoftHeap<int>::ListCell(&b);
+
+  fi->next = fo;
+  
+  if (fi->elem  != &a || fi->next->elem != &b)
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+  else
+    {
+      printf("\033[1;32m");
+      printf("SUCESS\n");
+      printf("\033[0m");
+    }
+  delete fi;
+}
+
+
 void test_constructor_node_with_children()
 {
   printf("\033[1;33m");
-  printf("TEST 5: Node constructor and add children to the node\n");
+  printf("TEST 6: Node constructor and add children to the node\n");
   printf("\033[0m");
 
   int a = 10;
