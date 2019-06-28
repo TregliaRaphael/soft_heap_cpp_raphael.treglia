@@ -48,10 +48,10 @@ int main() {
     s->insert(zzz);
     s->insert(ttttttt);
 
-    std::cout << "DELETE tata: " << s->fakeDelete(tata) << std::endl;
-    std::cout << "DELETE zzz: " << s->fakeDelete(zzz) << std::endl;
-    std::cout << "DELETE xz: " << s->fakeDelete(xz) << std::endl;
-    std::cout << "DELETE ttttttt: " << s->fakeDelete(ttttttt) << std::endl;
+    std::cout << "DELETE tata: " << s->realDelete(tata) << std::endl;
+    std::cout << "DELETE zzz: " << s->realDelete(zzz) << std::endl;
+    std::cout << "DELETE xz: " << s->realDelete(xz) << std::endl;
+    std::cout << "DELETE ttttttt: " << s->realDelete(ttttttt) << std::endl;
 
 
     auto *treze = new Str("treze"), *braaaa = new Str("braaaa"), *tkqiazezz = new Str("tkqiazezz");

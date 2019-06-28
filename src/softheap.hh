@@ -55,7 +55,7 @@ struct SoftHeap {
 
     void insert(E *e);
 
-    bool deleteE(E *e);
+    bool realDelete(E *e);
 
     bool fakeDelete(E *e);
 
@@ -77,8 +77,6 @@ struct SoftHeap {
     bool searchAndDestroy(Node *parent, Node *child, E *e);
 
     bool searchAndDestroyFake(Node *child, E *e);
-
-    void kickEFromList(ListCell *prev, ListCell *actual, Node *parent, Node *child);
 
     void merge_into(SoftHeap *q);
 

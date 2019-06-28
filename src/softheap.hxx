@@ -73,7 +73,7 @@ E *SoftHeap<E>::pick_elem(Tree *t, int *deleted) {
 
 
 template<typename E>
-std::optional <E*> SoftHeap<E>::extract_min() {
+std::optional<E *> SoftHeap<E>::extract_min() {
     int *deleted = new int(2);//DELETED = 2
     E *e = nullptr;
     while (*deleted == DELETED) {
@@ -95,7 +95,7 @@ std::optional <E*> SoftHeap<E>::extract_min() {
                 remove_tree(this, t);
 
                 //******
-                if (t->next == nullptr){
+                if (t->next == nullptr) {
                     if (t->prev == nullptr)
                         this->rank = -1;
                     else
@@ -289,89 +289,90 @@ bool SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e) {
 
     ListCell *l = child->list;
     ListCell *prev = nullptr;
-    bool lft, rgt;
+    bool success = false;
 
     while (l != nullptr) {
         if (*l->elem == *e) {
-            kickEFromList(prev, l, parent, child);
+            if (prev == nullptr && l->next == nullptr) {
+                child->list = nullptr;
+                child->num--;
+                sift(child);
+                if (parent->left == child){
+                    if (parent->left->list == nullptr){
+                        parent->left = nullptr;
+                        delete child;
+                    }
+                    else
+                        delete l;
+                }
+                else{
+                    if (parent->right->list == nullptr){
+                        parent->right = nullptr;
+                        delete child;
+                    }
+                    else
+                        delete l;
+                }
+            }
+                /*First elt of the list size > 1*/
+            else if (prev == nullptr) {
+                child->list = l->next;
+                l->next = nullptr;
+                delete l;
+            }
+                /*Last element*/
+            else if (l->next == nullptr) {
+                prev->next = nullptr;
+                delete l;
+            }
+                /*Element in the middle of the list*/
+            else {
+                prev->next = l->next;
+                delete l;
+            }
             return true;
         }
         prev = l;
         l = l->next;
     }
 
-    if (child->left != nullptr) {
-        lft = searchAndDestroy(child, child->left, e);
-        if (lft)
-            return true;
-    }
-
-    if (child->right != nullptr) {
-        rgt = searchAndDestroy(child, child->right, e);
-        if (rgt)
-            return true;
-    }
-    return false;
+    if (child->left != nullptr) success = searchAndDestroy(child, child->left, e);
+    if (!success && child->right != nullptr) success = searchAndDestroy(child, child->right, e);
+    return success;
 }
 
 
 template<typename E>
-void SoftHeap<E>::kickEFromList(ListCell *prev, ListCell *actual, Node *parent, Node *child) {
-    /*If only one element*/
-    if (prev == nullptr && actual->next == nullptr) {
-        delete child->list;
-        child->list = nullptr;
-        sift(child);
-        if (leaf(child)) {
-            if (parent->left == child)
-                parent->left = nullptr;
-            else
-                parent->right = nullptr;
-
-            //IF e become a allocated ptr var,
-            // we'll need to put child->ckey = nullptr; before delete
-            delete child;
-        }
-    }
-        /*First elt of the list size > 1*/
-    else if (prev == nullptr) {
-        child->list = actual->next;
-        actual->next = nullptr;
-        delete actual;
-    }
-        /*Last element*/
-    else if (actual->next == nullptr) {
-        prev->next = nullptr;
-        delete actual;
-    }
-        /*Element in the middle of the list*/
-    else {
-        prev->next = actual->next;
-        delete actual;
-    }
-}
-
-
-template<typename E>
-bool SoftHeap<E>::deleteE(E *e) {
+bool SoftHeap<E>::realDelete(E *e) {
     Tree *t = this->first;
+    bool success = false;
     while (t != nullptr) {
+
         ListCell *l = t->root->list;
         ListCell *prev = nullptr;
         assert(listSize(t->root) != 0);
-        bool lft, rgt;
+
         while (l != nullptr) {
             if (*l->elem == *e) {
                 if (prev == nullptr && l->next == nullptr) {
-                    delete t->root->list;
+                    l = t->root->list;
                     t->root->list = nullptr;
+                    t->root->num--;
                     sift(t->root);
-                    if (leaf(t->root)) {
-                        //IF e become a allocated ptr var,
-                        // we'll need to put child->ckey = nullptr; before delete
-                        delete t->root;
-                        t->root = nullptr;
+                    if (t->root->list == l) {
+                        if (t->next == nullptr and t->prev == nullptr)
+                            this->first = nullptr;
+                        else if (t->prev == nullptr)
+                            this->first = t->next;
+                        else if (t->next == nullptr)
+                            t->prev->next = nullptr;
+                        else
+                            t->prev->next = t->next;
+                        update_suffix_min(this->first);
+                        delete t;
                     }
+                    else
+                        delete l;
                 }
                     /*First elt of the list size > 1*/
                 else if (prev == nullptr) {
@@ -389,28 +390,19 @@ bool SoftHeap<E>::deleteE(E *e) {
                     prev->next = l->next;
                     delete l;
                 }
+
                 return true;
             }
             prev = l;
             l = l->next;
         }
-        if (t->root->left != nullptr) {
-            lft = searchAndDestroy(t->root, t->root->left, e);
-            if (lft)
-                return true;
-        }
-
-        if (t->root->right != nullptr) {
-            rgt = searchAndDestroy(t->root, t->root->right, e);
-            if (rgt)
-                return true;
-        }
-
+        if (t->root->left != nullptr) success = searchAndDestroy(t->root, t->root->left, e);
+        if (!success && t->root->right != nullptr) success = searchAndDestroy(t->root, t->root->right, e);
+        if (success)break;
         t = t->next;
     }
-    return false;
+    return success;
 }
-
 
 
 /*******FAKE DELETE********/
@@ -420,10 +412,10 @@ bool SoftHeap<E>::deleteE(E *e) {
 template<typename E>
 bool SoftHeap<E>::fakeDelete(E *e) {
     Tree *t = this->first;
+    bool success = false;
     while (t != nullptr) {
         ListCell *l = t->root->list;
         assert(listSize(t->root) != 0);
-        bool lft, rgt;
         while (l != nullptr) {
             if (*l->elem == *e) {
                 l->del = 2; //DELETED = 2
@@ -431,21 +423,12 @@ bool SoftHeap<E>::fakeDelete(E *e) {
             }
             l = l->next;
         }
-        if (t->root->left != nullptr) {
-            lft = searchAndDestroyFake(t->root->left, e);
-            if (lft)
-                return true;
-        }
-
-        if (t->root->right != nullptr) {
-            rgt = searchAndDestroyFake(t->root->right, e);
-            if (rgt)
-                return true;
-        }
-
+        if (t->root->left != nullptr) success = searchAndDestroyFake(t->root->left, e);
+        if (!success && t->root->right != nullptr) success = searchAndDestroyFake(t->root->right, e);
+        if (success) break;
         t = t->next;
     }
-    return false;
+    return success;
 }
 
 template<typename E>
@@ -453,7 +436,7 @@ bool SoftHeap<E>::searchAndDestroyFake(Node *child, E *e) {
     assert(listSize(child) != 0);
 
     ListCell *l = child->list;
-    bool lft, rgt;
+    bool success = false;
 
     while (l != nullptr) {
         if (*l->elem == *e) {
@@ -463,16 +446,7 @@ bool SoftHeap<E>::searchAndDestroyFake(Node *child, E *e) {
         l = l->next;
     }
 
-    if (child->left != nullptr) {
-        lft = searchAndDestroyFake(child->left, e);
-        if (lft)
-            return true;
-    }
-
-    if (child->right != nullptr) {
-        rgt = searchAndDestroyFake(child->right, e);
-        if (rgt)
-            return true;
-    }
-    return false;
+    if (child->left != nullptr) success = searchAndDestroyFake(child->left, e);
+    if (!success && child->right != nullptr) success = searchAndDestroyFake(child->right, e);
+    return success;
 }
