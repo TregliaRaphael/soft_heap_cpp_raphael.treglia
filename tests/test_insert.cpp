@@ -18,8 +18,7 @@ void test_insert_tree()
   SoftHeap<int>::Tree *to = new SoftHeap<int>::Tree(&c);
   sh->insert_tree(ch,to,ti);
 
-   
-  /*  if (sh->first->root->ckey != &a  || sh->first->root->ckey != &b || sh->first->root->ckey != &c)
+  if (*sh->first->root->ckey != 60  || *sh->first->root->ckey != 10 || *sh->first->root->ckey != 14 || *sh->first->root->ckey != 4)
     {
       printf("\033[1;31m");
       printf("FAIL\n");
@@ -28,9 +27,9 @@ void test_insert_tree()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
-      }  */
+      } 
   delete sh;
   delete ch;
 }

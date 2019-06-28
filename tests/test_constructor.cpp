@@ -20,10 +20,11 @@ void test_constructor_listcell()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
   delete fi;
+    
 }
 
 
@@ -44,7 +45,7 @@ void test_constructor_node()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
 
@@ -75,7 +76,7 @@ void test_constructor_tree()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
   delete tr;
@@ -104,7 +105,7 @@ void test_constructor_softheap()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
   delete sh;  
@@ -131,7 +132,7 @@ void test_constructor_listcell_with_several_cell()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
   delete fi;
@@ -162,7 +163,7 @@ void test_constructor_node_with_children()
   else
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
 
@@ -223,7 +224,7 @@ void test_constructor_tree_with_children()
   else 
     {
       printf("\033[1;32m");
-      printf("SUCESS\n");
+      printf("SUCCESS\n");
       printf("\033[0m");
     }
   delete tr;
