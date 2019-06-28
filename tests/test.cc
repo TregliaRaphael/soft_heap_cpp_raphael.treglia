@@ -11,8 +11,16 @@ class Test
             s->insert(&b);
             s->insert(&c);
             assert(*s->first->root->ckey == 4);
-            std::cout<<"pine\n";
             delete s;
+        }
+
+        static void unit_test_extract_void()
+        {
+            int a = 2;
+            SoftHeap<int> *s = new SoftHeap(&a);
+
+            assert(*s->extract_min().value() == 2);
+            assert(s->extract_min() == std::nullopt);
         }
 
         static void unit_test_next_ckey()
@@ -65,7 +73,6 @@ class Test
             assert(*s->extract_min().value() == 1);
             assert(*s->extract_min().value() == 2);
             assert(*s->extract_min().value() == 9);
-            //assert(s->extract_min() == std::nullopt);
             delete s;
         }
 
@@ -120,6 +127,7 @@ class Test
 int main(void)
 {
     Test::unit_test_first_ckey();
+    Test::unit_test_extract_void();
     Test::unit_test_next_ckey();
     Test::unit_test_child_ckeys();
     Test::unit_test_suf_min();
