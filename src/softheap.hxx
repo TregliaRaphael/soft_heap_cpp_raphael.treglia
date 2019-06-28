@@ -349,7 +349,7 @@ int SoftHeap<E>::realDelete(E *e, bool force_delete) {
 
         while (l != nullptr) {
             if (*l->elem == *e) {
-                if (l->del == 2 && force_delete)
+                if (l->del == 2 && !force_delete)
                     return ABORTED_DEL;
 
                 if (prev == nullptr && l->next == nullptr) {
