@@ -10,9 +10,13 @@
 
 ## Extract_min() => return the minimal element that is not tagged deleted
 
+### DELETE => you can use both delete in the same time to be able to manage memory as you wish
+
 ## FakeDelete(E e) => lazy manner deleted, it just marks the element as deleted and on the next extract_min
 While we are getting an element with the deleted tag, we extract again until get a not tagged deleted element
 
 ## RealDelete(E e) => Reald delete means that the element is deleted for real in the heap and the value in the list doesn't exists anymore
+
+
 
 # Need to do tests with always the sames values but not in the same order and not all time one by on
