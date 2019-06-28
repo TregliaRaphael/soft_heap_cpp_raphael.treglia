@@ -208,26 +208,44 @@ void test_6_merge_all_kind_of_delete() {
 }
 
 
-void test_7_ultime_test(int number_of_elem){
-    std::vector<int> numbers;
+void test_7_100000_value(int number_of_elem){
+    printName("test_7_100000_value");
+    std::vector<int*> numbers;
 
     std::random_device dev;
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist6(1,1000000);
 
     for (int i = 0; i < number_of_elem; i++){
-        numbers.push_back(dist6(rng));
+        numbers.push_back(new int(dist6(rng)));
     }
-    int first = 1;
-    SoftHeap<int> *s = new SoftHeap<int>(&first);
+    int cpt = 0;
+    auto s = new SoftHeap<int>();
+//    s->epsilon = 0.5;
+//    s->max_node_rank = log2(1. / s->epsilon) + 5;
 
     for (int i = 0; i < number_of_elem; i++){
-        s->insert(&numbers[i]);
+        s->insert(numbers[i]);
     }
+
+//    for (int i = 0; i < number_of_elem; i++){
+//        s->fakeDelete(numbers[i])? cpt++: cpt = cpt;
+//    }
+
+
+    std::optional<int *> tmp = s->extract_min();
+    while (tmp.value_or(nullptr) != nullptr) {
+        cpt++;
+        tmp = s->extract_min();
+    }
+
+    s->extract_min();
     for (int i = 0; i < number_of_elem; i++){
-        std::cout << **s->extract_min() << std::endl;
+        delete numbers[i];
     }
+
     delete s;
+    printRes(cpt == number_of_elem);
 }
 
 
@@ -239,7 +257,8 @@ int main() {
     test_4_already_deleted();
     test_5_fake_delete();
     test_6_merge_all_kind_of_delete();
-    test_7_ultime_test(100000);
+    test_7_100000_value(100000);
+    std::cout << std::endl << std::endl;
 }
 
 

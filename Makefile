@@ -24,7 +24,7 @@ test_soft:
 
 tricky_test: clean
 	$(CXX) $(CXXFLAGS) tests/tricky_test.cc -o $(@)
-	valgrind ./tricky_test
+	valgrind --main-stacksize=400000000  ./tricky_test
 
 
 run:

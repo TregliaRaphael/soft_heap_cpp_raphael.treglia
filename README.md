@@ -24,6 +24,7 @@ While we are getting an element with the deleted tag, we extract again until get
 ## Moreover, you can precise in realDelete if you want to delete an element tagged deleted or not.
 ## force_delete = true => delete even deleted tagged element
 ## force_delete = false => delete only untagged deleted element
-
+## can cause invalid read of size if you don't allocate your memory
+## don't forget to extend the stack when using valgrind => --main-stacksize=number
 
 # Need to do tests with always the sames values but not in the same order and not all time one by on

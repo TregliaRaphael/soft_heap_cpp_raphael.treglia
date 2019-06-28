@@ -288,7 +288,6 @@ void SoftHeap<E>::repeated_combine(SoftHeap *q, int rk) {
  */
 template<typename E>
 int SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e, bool force_delete) {
-    assert(listSize(child) != 0);
 
     ListCell *l = child->list;
     ListCell *prev = nullptr;
@@ -310,11 +309,13 @@ int SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e, bool force_de
                     parent->right = nullptr;
                     delete child;
                 }
+
             }
                 /*First elt of the list size > 1*/
             else if (prev == nullptr) {
                 child->list = l->next;
                 l->next = nullptr;
+
             }
                 /*Last element*/
             else if (l->next == nullptr)
@@ -323,7 +324,6 @@ int SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e, bool force_de
                 /*Element in the middle of the list*/
             else
                 prev->next = l->next;
-
             delete l;
             return DELETED;
         }
@@ -345,7 +345,6 @@ int SoftHeap<E>::realDelete(E *e, bool force_delete) {
 
         ListCell *l = t->root->list;
         ListCell *prev = nullptr;
-        assert(listSize(t->root) != 0);
 
         while (l != nullptr) {
             if (*l->elem == *e) {
@@ -413,7 +412,6 @@ bool SoftHeap<E>::fakeDelete(E *e) {
     bool success = false;
     while (t != nullptr) {
         ListCell *l = t->root->list;
-        assert(listSize(t->root) != 0);
         while (l != nullptr) {
             if (*l->elem == *e) {
                 l->del = 2; //DELETED = 2
@@ -431,7 +429,6 @@ bool SoftHeap<E>::fakeDelete(E *e) {
 
 template<typename E>
 bool SoftHeap<E>::searchAndDestroyFake(Node *child, E *e) {
-    assert(listSize(child) != 0);
 
     ListCell *l = child->list;
     bool success = false;
