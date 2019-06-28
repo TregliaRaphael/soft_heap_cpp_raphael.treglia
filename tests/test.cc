@@ -157,7 +157,7 @@ class Test
 
             delete s;
         }
-        
+
         static void unit_test_insert_random_3()
         {
             int a = 2, b = 9, c = 1, d = 6;
@@ -185,6 +185,22 @@ class Test
             assert(*s->first->sufmin->root->ckey == 1);
         }
 
+        static void hard_suff_min()
+        { 
+            int a = 2, b = 9, c = 1, d = 6;
+            SoftHeap<int> *s = new SoftHeap(&b);
+            assert(*s->first->sufmin->root->ckey == 9);
+
+            s->insert(&d);
+            assert(*s->first->sufmin->root->ckey == 6);
+
+            s->insert(&a);
+            assert(*s->first->sufmin->root->ckey == 2);
+
+            s->insert(&c);
+            assert(*s->first->sufmin->root->ckey == 1);
+        }
+
 
 
 
@@ -204,4 +220,5 @@ int main(void)
     Test::unit_test_insert_random_2();
     Test::unit_test_insert_random_3();
     Test::easy_suff_min();
+    Test::hard_suff_min();
 }
