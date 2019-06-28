@@ -16,7 +16,7 @@ void test_insert_tree()
   SoftHeap<int> *ch = new SoftHeap(&d);
   SoftHeap<int>::Tree *ti = new SoftHeap<int>::Tree(&b);
   SoftHeap<int>::Tree *to = new SoftHeap<int>::Tree(&c);
-  ch->insert_tree(sh,to,ti);
+  sh->insert_tree(ch,to,ti);
 
    
   /*  if (sh->first->root->ckey != &a  || sh->first->root->ckey != &b || sh->first->root->ckey != &c)
