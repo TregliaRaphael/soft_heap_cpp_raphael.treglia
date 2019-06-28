@@ -29,4 +29,14 @@ While we are getting an element with the deleted tag, we extract again until get
 
 # Need to do tests with always the sames values but not in the same order and not all time one by on
 
+### What about tests (Makefile):
+
+## Some constructors tested => make test
+
+## Some basics uses of fonctions => make test_soft
+
+## Some tricky tests using valgrind => make tricky_test
+
+## Test vs std::sort => make time_test
+
 
