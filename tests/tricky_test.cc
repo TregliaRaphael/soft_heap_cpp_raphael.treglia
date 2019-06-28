@@ -41,27 +41,26 @@ void printRes(bool success) {
         printf("\033[0m");
     } else {
         printf("\033[1;32m");
-        printf("SUCESS\n");
+        printf("SUCCESS\n");
         printf("\033[0m");
     }
 }
 
 void test_1_insert_then_delete_x2(){
-    int t = 1, tt = 2;
+    int t = 1, tt = 2, ttt = 3;
 
     SoftHeap<int> *s = new SoftHeap<int>(&t);
     s->insert(&tt);
     s->realDelete(&t);
     s->realDelete(&tt);
-    s->insert(&t);
+    s->insert(&ttt);
+    printRes(s->first->root->ckey == &ttt);
     delete s;
 
 }
 
-
-int main() {
-    test_1_insert_then_delete_x2();
-    /*auto *tata = new Str("tata"), *z = new Str("z"), *ttttttt = new Str("ttttttt"), *xz = new Str("xz"),
+void test_2_using_other_class(){
+    auto *tata = new Str("tata"), *z = new Str("z"), *ttttttt = new Str("ttttttt"), *xz = new Str("xz"),
             *azezaeazeeze = new Str("azezaeazeeze"), *zzz = new Str("zzz");
 
     SoftHeap <Str> *s = new SoftHeap<Str>(tata);
@@ -71,10 +70,10 @@ int main() {
     s->insert(zzz);
     s->insert(ttttttt);
 
-    std::cout << "DELETE tata: " << s->realDelete(tata, false) << std::endl;
-    std::cout << "DELETE zzz: " << s->realDelete(zzz, false) << std::endl;
-    std::cout << "DELETE xz: " << s->realDelete(xz, false) << std::endl;
-    std::cout << "DELETE ttttttt: " << s->realDelete(ttttttt, false) << std::endl;
+    std::cout << "DELETE tata: " << s->realDelete(tata) << std::endl;
+    std::cout << "DELETE zzz: " << s->realDelete(zzz) << std::endl;
+    std::cout << "DELETE xz: " << s->realDelete(xz) << std::endl;
+    std::cout << "DELETE ttttttt: " << s->realDelete(ttttttt) << std::endl;
 
 
     auto *treze = new Str("treze"), *braaaa = new Str("braaaa"), *tkqiazezz = new Str("tkqiazezz");
@@ -84,9 +83,12 @@ int main() {
 
     s->meld(nw);
 
+    int cpt = 0;
+
     std::optional < Str * > tmp = s->extract_min();
     while (tmp.value_or(nullptr) != nullptr) {
         std::cout << (*tmp)->s << std::endl;
+        cpt++;
         tmp = s->extract_min();
     }
 
@@ -102,7 +104,15 @@ int main() {
     delete tkqiazezz;
 
     delete nw;
-    delete s;*/
+    delete s;
+
+    printRes(cpt == 5);
+}
+
+
+int main() {
+    test_1_insert_then_delete_x2();
+    test_2_using_other_class();
 
     /*int t = 1, tt = 2, ttt = 3, tttt = 4, ttttt = 5, tttttt = 6, ttttttt = 7,
     tttttttt = 8, ttttttttt = 9;

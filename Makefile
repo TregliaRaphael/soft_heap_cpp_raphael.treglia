@@ -20,7 +20,6 @@ test_soft:
 
 tricky_test:
 	$(CXX) $(CXXFLAGS) tests/tricky_test.cc -o $(@)
-	./$(@)
 
 all: $(EXEC)
 

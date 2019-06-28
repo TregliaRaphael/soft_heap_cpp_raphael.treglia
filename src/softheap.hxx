@@ -308,28 +308,25 @@ int SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e, bool force_de
                 if (parent->left == child && parent->left->list == nullptr) {
                     parent->left = nullptr;
                     delete child;
-                } else if (parent->right->list == nullptr) {
+                } else if (parent->right == child && parent->right->list == nullptr) {
                     parent->right = nullptr;
                     delete child;
                 }
-                delete l;
             }
                 /*First elt of the list size > 1*/
             else if (prev == nullptr) {
                 child->list = l->next;
                 l->next = nullptr;
-                delete l;
             }
                 /*Last element*/
-            else if (l->next == nullptr) {
+            else if (l->next == nullptr)
                 prev->next = nullptr;
-                delete l;
-            }
+
                 /*Element in the middle of the list*/
-            else {
+            else
                 prev->next = l->next;
-                delete l;
-            }
+
+            delete l;
             return DELETED;
         }
         prev = l;
@@ -365,13 +362,17 @@ int SoftHeap<E>::realDelete(E *e, bool force_delete) {
                     if (t->root->list == nullptr) {
                         if (t->next == nullptr and t->prev == nullptr)
                             this->first = nullptr;
-                        else if (t->prev == nullptr)
+                        else if (t->prev == nullptr) {
+                            t->next->prev = nullptr;
                             this->first = t->next;
+                        }
                         else if (t->next == nullptr)
                             t->prev->next = nullptr;
                         else
                             t->prev->next = t->next;
                         update_suffix_min(this->first);
+                        t->next = nullptr;
+                        t->prev = nullptr;
                         delete t;
                     }
                 }
