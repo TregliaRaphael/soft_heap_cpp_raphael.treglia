@@ -221,16 +221,10 @@ void test_7_100000_value(int number_of_elem){
     }
     int cpt = 0;
     auto s = new SoftHeap<int>();
-//    s->epsilon = 0.5;
-//    s->max_node_rank = log2(1. / s->epsilon) + 5;
 
     for (int i = 0; i < number_of_elem; i++){
         s->insert(numbers[i]);
     }
-
-//    for (int i = 0; i < number_of_elem; i++){
-//        s->fakeDelete(numbers[i])? cpt++: cpt = cpt;
-//    }
 
 
     std::optional<int *> tmp = s->extract_min();
@@ -239,7 +233,6 @@ void test_7_100000_value(int number_of_elem){
         tmp = s->extract_min();
     }
 
-    s->extract_min();
     for (int i = 0; i < number_of_elem; i++){
         delete numbers[i];
     }

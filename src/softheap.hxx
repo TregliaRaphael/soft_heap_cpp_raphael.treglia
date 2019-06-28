@@ -173,6 +173,8 @@ void SoftHeap<E>::sift(Node *x) {
 }
 
 
+/************EPSYLON USE HERE max node rank**********/
+
 template<typename E>
 typename SoftHeap<E>::Node *SoftHeap<E>::combine(Node *x, Node *y) {
     Node *z = new Node(x, y);
