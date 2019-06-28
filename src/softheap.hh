@@ -9,7 +9,7 @@
 #include <typeinfo>
 
 
-#define NOT_IN_HEAP 0
+#define ABORTED_DEL 0
 #define NOT_DELETED 1
 #define DELETED 2
 
@@ -55,7 +55,7 @@ struct SoftHeap {
 
     void insert(E *e);
 
-    bool realDelete(E *e);
+    int realDelete(E *e, bool force_delete);
 
     bool fakeDelete(E *e);
 
@@ -74,7 +74,7 @@ struct SoftHeap {
 
     Node *combine(Node *x, Node *y);
 
-    bool searchAndDestroy(Node *parent, Node *child, E *e);
+    int searchAndDestroy(Node *parent, Node *child, E *e, bool force_delete);
 
     bool searchAndDestroyFake(Node *child, E *e);
 

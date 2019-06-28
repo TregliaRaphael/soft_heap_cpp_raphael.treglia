@@ -24,7 +24,6 @@ void test_constructor_listcell()
       printf("\033[0m");
     }
   delete fi;
-    
 }
 
 
