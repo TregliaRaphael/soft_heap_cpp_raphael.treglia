@@ -121,6 +121,8 @@ class Test
             assert(*s->extract_min().value() == 12);
             assert(*s->extract_min().value() == 19);
             assert(*s->extract_min().value() == 19);
+            assert(s->extract_min() == std::nullopt);
+
         }
 };
 
