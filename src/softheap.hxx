@@ -79,7 +79,7 @@ std::optional<E *> SoftHeap<E>::extract_min() {
     while (*deleted == DELETED) {
         if (this->first == nullptr) {
             delete deleted;
-            return {};
+            return std::nullopt;
         }
 
         Tree *t = this->first->sufmin;
