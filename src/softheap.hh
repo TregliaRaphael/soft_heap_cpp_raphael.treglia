@@ -55,7 +55,7 @@ struct SoftHeap {
 
     void insert(E *e);
 
-    int realDelete(E *e, bool force_delete);
+    int realDelete(E *e, bool force_delete = false);
 
     bool fakeDelete(E *e);
 
@@ -74,7 +74,7 @@ struct SoftHeap {
 
     Node *combine(Node *x, Node *y);
 
-    int searchAndDestroy(Node *parent, Node *child, E *e, bool force_delete);
+    int searchAndDestroy(Node *parent, Node *child, E *e, bool force_delete = false);
 
     bool searchAndDestroyFake(Node *child, E *e);
 
@@ -105,7 +105,6 @@ struct SoftHeap {
 
 /*CONSTRUCTORS*/
 
-//FIXME NEW E
 template<typename E>
 SoftHeap<E>::ListCell::ListCell(E *e) {
     this->elem = e;
@@ -124,7 +123,6 @@ SoftHeap<E>::Node::Node(SoftHeap<E>::Node *l, SoftHeap<E>::Node *r) {
     this->right = r;
 }
 
-//FIXME NEW E
 template<typename E>
 SoftHeap<E>::Node::Node(E *e) {
     this->list = new ListCell(e);

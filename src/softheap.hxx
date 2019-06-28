@@ -3,9 +3,14 @@
 
 template<typename E>
 void SoftHeap<E>::insert(E *e) {
-    SoftHeap <E> *q = new SoftHeap<E>(e);
-    meld(q);
-    delete q;
+    if (this->first == nullptr) {
+        this->first = new Tree(e);
+    }
+    else{
+        SoftHeap <E> *q = new SoftHeap<E>(e);
+        meld(q);
+        delete q;
+    }
 }
 
 
@@ -357,7 +362,7 @@ int SoftHeap<E>::realDelete(E *e, bool force_delete) {
                     t->root->list = nullptr;
                     t->root->num--;
                     sift(t->root);
-                    if (t->root->list == l) {
+                    if (t->root->list == nullptr) {
                         if (t->next == nullptr and t->prev == nullptr)
                             this->first = nullptr;
                         else if (t->prev == nullptr)
