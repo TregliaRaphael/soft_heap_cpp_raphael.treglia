@@ -10,7 +10,7 @@ std::string base_end = "\033[0m";
 
 void std_sort_ref(std::vector<int> numbers){
 
-    std::cout << base_other << "std::sort reference" << base_end << std::endl;
+    std::cout << base_other << "std::sort reference complexity O(n*log(n))" << base_end << std::endl;
 
     clock_t tStart = clock();
 
@@ -24,7 +24,7 @@ void std_sort_ref(std::vector<int> numbers){
 
 
 void fast_test(std::vector<int*> numbers, int number_of_elem, double epsi){
-    std::cout << base_other << "Fast test epsilon : " << epsi << base_end << std::endl;
+    std::cout << base_other << "SoftHeap epsilon : " << epsi << base_end << std::endl;
 
     auto s = new SoftHeap<int>();
 
@@ -47,7 +47,13 @@ void fast_test(std::vector<int*> numbers, int number_of_elem, double epsi){
 
 
 int main() {
+    std::cout <<std::endl << base_green << "SoftHeap epsilon test compare vs std::sort : " << base_end;
     std::cout << std::endl;
+
+    int number_of_element = 10000000;
+
+    std::cout << base_other << "Testing on " << number_of_element << " elements" << base_end;
+    std::cout << std::endl << std::endl;
 
     std::vector<int*> for_test;
     std::vector<int> for_ref;
@@ -55,7 +61,6 @@ int main() {
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist6(1,1000000000);
 
-    int number_of_element = 10000000;
 
     for (int i = 0; i < number_of_element; i++){
         for_ref.push_back((int)dist6(rng));
