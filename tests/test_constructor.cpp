@@ -111,10 +111,38 @@ void test_constructor_softheap()
   delete sh;  
 }
 
+void test_constructor_listcell_with_several_cell()
+{
+  printf("\033[1;33m");
+  printf("TEST 5: Simple ListCell constructor with several cell\n");
+  printf("\033[0m");
+  int a = 968 ;
+  int b = 4;
+  SoftHeap<int>::ListCell *fi = new SoftHeap<int>::ListCell(&a);
+  SoftHeap<int>::ListCell *fo = new SoftHeap<int>::ListCell(&b);
+
+  fi->next = fo;
+  
+  if (fi->elem  != &a || fi->next->elem != &b)
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+  else
+    {
+      printf("\033[1;32m");
+      printf("SUCESS\n");
+      printf("\033[0m");
+    }
+  delete fi;
+}
+
+
 void test_constructor_node_with_children()
 {
   printf("\033[1;33m");
-  printf("TEST 5: Node constructor and add children to the node\n");
+  printf("TEST 6: Node constructor and add children to the node\n");
   printf("\033[0m");
 
   int a = 10;
@@ -140,4 +168,64 @@ void test_constructor_node_with_children()
     }
 
   delete lo;
+}
+
+void test_constructor_tree_with_children()
+{
+  printf("\033[1;33m");
+  printf("TEST 7: Tree constructor  with children\n");
+  printf("\033[0m");
+
+  int a = 10;
+  int b = 50;
+  int c = 80; 
+  SoftHeap<int>::Tree *tr = new SoftHeap<int>::Tree(&a);
+  SoftHeap<int>::Tree *prev_child = new SoftHeap<int>::Tree(&b);
+  SoftHeap<int>::Tree *next_child = new SoftHeap<int>::Tree(&c);
+
+  tr->next = next_child ;
+  tr->prev = prev_child ; 
+  
+  if (tr->root->ckey  != &a || tr->root->rank != 0 || tr->root->size !=1 )
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+  else if ( tr->prev == nullptr || tr->next == nullptr || tr->rank != 0)
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+
+  else if (tr->prev->root->ckey  != &b || tr->prev->root->rank != 0 || tr->prev->root->size !=1 || tr->prev->prev!=nullptr|| tr->prev->next != nullptr)
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+
+  else if (tr->next->root->ckey != &c || tr->next->root->rank !=0 || tr->next->root->size!=1 || tr->next->prev!=nullptr|| tr->next->next != nullptr)
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+
+  else if ( tr->prev == nullptr || tr->next == nullptr || tr->next->rank != 0 || tr->prev->rank )
+    {
+      printf("\033[1;31m");
+      printf("FAIL\n");
+      printf("\033[0m");
+    }
+  
+  
+  else 
+    {
+      printf("\033[1;32m");
+      printf("SUCESS\n");
+      printf("\033[0m");
+    }
+  delete tr;
 }
