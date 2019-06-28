@@ -19,6 +19,7 @@ void launch_test_insert()
   printf("\033[1;36m");
   printf("TESTS OF THE INSERT FUNCTIONS\n");
   printf("\033[0m");
+  test_insert_tree();
 }
 
 
