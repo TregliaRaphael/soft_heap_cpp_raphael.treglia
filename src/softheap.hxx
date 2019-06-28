@@ -99,14 +99,12 @@ std::optional<E *> SoftHeap<E>::extract_min() {
                 delete x;
                 remove_tree(this, t);
 
-                //******
                 if (t->next == nullptr) {
                     if (t->prev == nullptr)
                         this->rank = -1;
                     else
                         this->rank = t->prev->rank;
                 }
-                //*********
 
                 if (t->prev != NULL)
                     update_suffix_min(t->prev);
@@ -117,7 +115,6 @@ std::optional<E *> SoftHeap<E>::extract_min() {
             }
         }
     }
-    delete deleted;
     return e;
 }
 
