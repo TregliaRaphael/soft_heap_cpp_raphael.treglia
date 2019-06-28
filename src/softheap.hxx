@@ -67,11 +67,11 @@ E *SoftHeap<E>::pick_elem(Tree *t, int *deleted) {
         actual->next = nullptr;
         delete actual;
     }
-
+    t->root->num--;
     return act_elem;
 }
 
-//FIXME CARE E*
+
 template<typename E>
 std::optional <E*> SoftHeap<E>::extract_min() {
     int *deleted = new int(2);//DELETED = 2
@@ -86,21 +86,30 @@ std::optional <E*> SoftHeap<E>::extract_min() {
         Node *x = t->root;
         e = pick_elem(t, deleted);
 
-        if (listSize(x) <= x->size / 2) {
+        if (x->num <= x->size / 2) {
             if (!leaf(x)) {
                 sift(x);
                 update_suffix_min(t);
-            } else if (x->list == nullptr) {
+            } else if (x->num == 0) {
                 delete x;
                 remove_tree(this, t);
-            }
 
-            if (t->prev != NULL)
-                update_suffix_min(t->prev);
-            t->prev = nullptr;
-            t->next = nullptr;
-            t->root = nullptr;
-            delete t;
+                //******
+                if (t->next == nullptr){
+                    if (t->prev == nullptr)
+                        this->rank = -1;
+                    else
+                        this->rank = t->prev->rank;
+                }
+                //*********
+
+                if (t->prev != NULL)
+                    update_suffix_min(t->prev);
+                t->prev = nullptr;
+                t->next = nullptr;
+                t->root = nullptr;
+                delete t;
+            }
         }
     }
     delete deleted;
@@ -126,28 +135,26 @@ template<typename E>
 void SoftHeap<E>::concatenate(Node *n1, Node *n2) {
     if (n1->list == nullptr and n2->list == nullptr)
         return;
-    else if (n1->list == nullptr) {
+    else if (n1->list == nullptr)
         n1->list = n2->list;
-        n1->num = n2->num;
-        n2->num = 0;
-    } else if (n2->list == nullptr)
+    else if (n2->list == nullptr)
         return;
     else {
         ListCell *l = n1->list;
         while (l->next != nullptr)
             l = l->next;
         l->next = n2->list;
-        n1->num += n2->num;
-        n2->num = 0;
+
     }
+    n1->num += n2->num;
+    n2->num = 0;
     n2->list = nullptr;
-    //FIXME do smtg with nelemns when delete will works
 }
 
 
 template<typename E>
 void SoftHeap<E>::sift(Node *x) {
-    while (listSize(x) < x->size && !leaf(x)) {
+    while (x->num < x->size && !leaf(x)) {
         if (x->left == nullptr || (x->right != nullptr && *x->left->ckey > *x->right->ckey))
             swapLR(x);
 

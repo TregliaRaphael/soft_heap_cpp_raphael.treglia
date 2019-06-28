@@ -43,10 +43,10 @@ int main() {
 
     SoftHeap<Str> *s = new SoftHeap<Str>(tata);
     s->insert(z);
-    s->insert(ttttttt);
     s->insert(xz);
     s->insert(azezaeazeeze);
     s->insert(zzz);
+    s->insert(ttttttt);
 
     std::cout << "DELETE tata: " << s->fakeDelete(tata) << std::endl;
     std::cout << "DELETE zzz: " << s->fakeDelete(zzz) << std::endl;
@@ -80,6 +80,7 @@ int main() {
 
     delete nw;
     delete s;
+
     /*int t = 1, tt = 2, ttt = 3, tttt = 4, ttttt = 5, tttttt = 6, ttttttt = 7,
     tttttttt = 8, ttttttttt = 9;
 
