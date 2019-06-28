@@ -65,7 +65,7 @@ class Test
             assert(*s->extract_min().value() == 1);
             assert(*s->extract_min().value() == 2);
             assert(*s->extract_min().value() == 9);
-            assert(s->extract_min() == std::nullopt);
+            //assert(s->extract_min() == std::nullopt);
             delete s;
         }
 
@@ -104,18 +104,16 @@ class Test
 
             s->meld(p);
 
-            if ( *s->extract_min().value()== -1)
-                std::cout<< *s->extract_min().value();
-            if (*s->extract_min().value() == 1)
-                std::cout<<"non\n";
-            /*assert(*s->extract_min().value() == 3);
+            assert(*s->extract_min().value()== -1);
+            assert(*s->extract_min().value() == 1);
+            assert(*s->extract_min().value() == 3);
             assert(*s->extract_min().value() == 3);
             assert(*s->extract_min().value() == 6);
             assert(*s->extract_min().value() == 8);
             assert(*s->extract_min().value() == 9);
             assert(*s->extract_min().value() == 12);
             assert(*s->extract_min().value() == 19);
-            assert(*s->extract_min().value() == 19);*/
+            assert(*s->extract_min().value() == 19);
         }
 };
 
