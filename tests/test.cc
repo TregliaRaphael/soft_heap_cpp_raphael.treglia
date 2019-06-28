@@ -123,7 +123,60 @@ class Test
             assert(*s->extract_min().value() == 19);
             assert(s->extract_min() == std::nullopt);
 
+            delete s;
+            delete p;
         }
+
+        static void unit_test_insert_random_1()
+        {
+            int a = 2, b = 9, c = 1, d = 6;
+            SoftHeap<int> *s = new SoftHeap(&a);
+            s->insert(&b);
+            s->insert(&c);
+            s->insert(&d);
+            assert(*s->extract_min().value() == 1);
+            assert(*s->extract_min().value() == 2);
+            assert(*s->extract_min().value() == 6);
+            assert(*s->extract_min().value() == 9);
+            delete s;
+
+        }
+
+        static void unit_test_insert_random_2()
+        {
+            int a = 2, b = 9, c = 1, d = 6;
+            SoftHeap<int> *s = new SoftHeap(&a);
+            s->insert(&b);
+            s->insert(&c);
+            s->insert(&d);
+
+            assert(*s->first->root->ckey == 1);
+            assert(*s->first->root->right->ckey == 2 );
+            assert(*s->first->root->left->ckey == 6);
+            assert(*s->first->root->right->right->ckey == 9);
+
+            delete s;
+        }
+        
+        static void unit_test_insert_random_2()
+        {
+            int a = 2, b = 9, c = 1, d = 6;
+            SoftHeap<int> *s = new SoftHeap(&a);
+            s->insert(&b);
+            s->insert(&c);
+            s->insert(&d);
+
+            assert(*s->first->root->ckey == 1);
+            assert(*s->first->root->right->ckey == 2 );
+            assert(*s->first->root->left->ckey == 6);
+            assert(*s->first->root->right->right->ckey == 9);
+
+            delete s;
+        }
+
+
+
+
 };
 
 int main(void)
@@ -136,4 +189,6 @@ int main(void)
     Test::unit_test_delete();
     Test::unit_test_meld();
     Test::unit_test_hard_meld();
+    Test::unit_test_insert_random_1();
+    Test::unit_test_insert_random_2();
 }
