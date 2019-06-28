@@ -13,7 +13,7 @@ soft_heap: $(FILE)
 
 test:
 	$(CXX) $(CXXFLAGS) $(TEST) -o $(@)
-	./$(@)
+
 
 test_soft:
 	$(CXX) $(CXXFLAGS) tests/test.cc -o $(@)
