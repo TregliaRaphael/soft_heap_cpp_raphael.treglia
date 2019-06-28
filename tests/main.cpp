@@ -8,6 +8,7 @@ int main (void)
   test_constructor_softheap();
   test_constructor_listcell_with_several_cell();
   test_constructor_node_with_children();
+  test_constructor_tree_with_children();
   
   return 0;
 }
