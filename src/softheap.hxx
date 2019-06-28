@@ -297,22 +297,14 @@ bool SoftHeap<E>::searchAndDestroy(Node *parent, Node *child, E *e) {
                 child->list = nullptr;
                 child->num--;
                 sift(child);
-                if (parent->left == child){
-                    if (parent->left->list == nullptr){
-                        parent->left = nullptr;
-                        delete child;
-                    }
-                    else
-                        delete l;
+                if (parent->left == child && parent->left->list == nullptr) {
+                    parent->left = nullptr;
+                    delete child;
+                } else if (parent->right->list == nullptr) {
+                    parent->right = nullptr;
+                    delete child;
                 }
-                else{
-                    if (parent->right->list == nullptr){
-                        parent->right = nullptr;
-                        delete child;
-                    }
-                    else
-                        delete l;
-                }
+                delete l;
             }
                 /*First elt of the list size > 1*/
             else if (prev == nullptr) {
@@ -371,8 +363,7 @@ bool SoftHeap<E>::realDelete(E *e) {
                         update_suffix_min(this->first);
                         delete t;
                     }
-                    else
-                        delete l;
+                    delete l;
                 }
                     /*First elt of the list size > 1*/
                 else if (prev == nullptr) {
