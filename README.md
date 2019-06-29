@@ -51,4 +51,7 @@ Then if you know the number of elements to sort and that the %error that you can
 then this algo is yours.
 Otherwise, you can go away.
 
+### To improve the efficiency
+Just store the last element of the list then we wont need to browse all list to concatenate element.
+
 
