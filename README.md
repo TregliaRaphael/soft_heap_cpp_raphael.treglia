@@ -42,5 +42,12 @@ don't forget to extend the stack when using valgrind => --main-stacksize=number
 #### Some tricky tests using valgrind => make tricky_test
 
 #### Test vs std::sort => make time_test
+The error rate of the algo is also displayed while testing because it's not fair for std::sort if we compare
+only the time.
+
+As you'll be able to see, epsilon affect on the number of element you can put without getting any error of sort.
+Then if you know the number of elements to sort and that the %error that you can incur (if you accept any error rate),
+then this algo is yours.
+Otherwise, you can go away.
 
 

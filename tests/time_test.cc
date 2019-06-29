@@ -43,11 +43,10 @@ void std_sort_ref(std::vector<int> numbers) {
 void fast_test(std::vector<int *> numbers, int number_of_elem, double epsi) {
     std::cout << base_other << "Fast test epsilon : " << epsi << base_end << std::endl;
 
-    auto s = new SoftHeap<int>();
+    auto s = new SoftHeap<int>(epsi);
     std::vector<int*> extracted;
 
-    s->epsilon = epsi;
-    s->max_node_rank = std::ceil(log2(1. / s->epsilon)) + 5;
+    std::cout << "Max rank for the node : " << s->max_node_rank << std::endl;
 
     clock_t tStart = clock();
 
@@ -70,6 +69,7 @@ void fast_test(std::vector<int *> numbers, int number_of_elem, double epsi) {
     std::cout << std::endl << std::endl;
 
     delete s;
+    s = nullptr;
 }
 
 
@@ -81,9 +81,9 @@ int main() {
     std::mt19937 rng(dev());
     std::uniform_int_distribution <std::mt19937::result_type> dist6(1, 1000000000);
 
-    std::array<double, 10> epsiarr = {0.01, 0.02, 0.03, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.15};
+    std::array<double, 7> epsiarr = {0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.3};
 
-    int range_elements = 10000;
+    int range_elements = 25000;
     int padding = 1;
     int basics = 1000;
 
@@ -102,7 +102,7 @@ int main() {
             for_test.push_back(new int(dist6(rng)));
         }
 
-        for (int i = 0; i < 10; i ++)
+        for (int i = 0; i < 7; i ++)
             fast_test(for_test, elem, epsiarr[i]);
 
         for (int i = 0; i < elem; i++) {

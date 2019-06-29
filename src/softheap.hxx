@@ -8,6 +8,8 @@ void SoftHeap<E>::insert(E *e) {
     }
     else{
         SoftHeap <E> *q = new SoftHeap<E>(e);
+        q->max_node_rank = this->max_node_rank;
+        q->epsilon = this->epsilon;
         meld(q);
         delete q;
     }
@@ -25,19 +27,13 @@ void SoftHeap<E>::swapLR(Node *x) {
 template<typename E>
 void SoftHeap<E>::thisSwap(SoftHeap *Q) {
     Tree *tQ = Q->first;
-    int maxQ = Q->max_node_rank;
     int rkQ = Q->rank;
-    double epsQ = Q->epsilon;
 
     Q->first = this->first;
-    Q->max_node_rank = this->max_node_rank;
     Q->rank = this->rank;
-    Q->epsilon = this->epsilon;
 
     this->first = tQ;
-    this->max_node_rank = maxQ;
     this->rank = rkQ;
-    this->epsilon = epsQ;
 }
 
 
@@ -178,7 +174,7 @@ void SoftHeap<E>::sift(Node *x) {
 template<typename E>
 typename SoftHeap<E>::Node *SoftHeap<E>::combine(Node *x, Node *y) {
     Node *z = new Node(x, y);
-    if (x->rank <= this->max_node_rank)
+    if (z->rank <= this->max_node_rank)
         z->size = 1;
     else
         z->size = (3 * x->size + 1) / 2;
