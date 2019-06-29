@@ -1,4 +1,5 @@
-# SOFT HEAP Project C++ project
+# SOFT HEAP Project C++ project 
+doc: https://epubs.siam.org/doi/pdf/10.1137/1.9781611973068.53
 
 ## Soft Heap variante from kaplan choosen => BTree implem
 
