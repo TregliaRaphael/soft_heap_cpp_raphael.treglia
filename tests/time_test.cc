@@ -3,6 +3,7 @@
 #include <random>
 #include <ctime>
 #include <algorithm>
+#include <array>
 
 std::string base_green = "\033[1;32m";
 std::string base_other = "\033[1;33m";
@@ -69,6 +70,7 @@ int main() {
     std::mt19937 rng(dev());
     std::uniform_int_distribution <std::mt19937::result_type> dist6(1, 1000000000);
 
+    std::array<double, 10> epsiarr = {0.01, 0.02, 0.03, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.15};
 
     int range_elements = 10000000;
 
@@ -87,8 +89,8 @@ int main() {
             for_test.push_back(new int(dist6(rng)));
         }
 
-        for (double i = 0.1; i < 1; i += 0.1)
-            fast_test(for_test, elem, i);
+        for (int i = 0; i < 10; i ++)
+            fast_test(for_test, elem, epsiarr[i]);
 
         for (int i = 0; i < elem; i++) {
             delete for_test[i];
