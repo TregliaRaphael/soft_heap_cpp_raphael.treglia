@@ -153,9 +153,10 @@ SoftHeap<E>::SoftHeap(E *e) {
     this->first = new Tree(e);
 }
 
+
 template<typename E>
 SoftHeap<E>::SoftHeap() {
-    this->epsilon = 0.1;
+    this->epsilon = 0.5;
     this->rank = 0;
     this->max_node_rank = std::ceil(log2(1. / this->epsilon)) + 5;
     this->first = nullptr;
